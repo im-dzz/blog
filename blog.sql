@@ -1,16 +1,15 @@
 drop table blog;
 create table blog(
 serialno int auto_increment primary key,
-titleid varchar(20) not null unique,
 title varchar(100) not null unique,
 sub_title varchar(100),
-content varchar(10000),
+content text,
 create_date datetime,
 update_date datetime
 );
 
 INSERT into blog values(0 ,'0101', '第一篇博客', '博客博客', 'something', sysdate(), sysdate()); 
-INSERT into blog values(0 ,'0103', 'Linux: 发布应用', '使用脚本自动发布', "<h2><a name=\"header-n179\" class=\"md-header-anchor md-print-anchor\" href=\"af://n179\"> </a><span>步骤</span></h2>
+INSERT into blog values(0 , 'Linux: 发布应用', '使用脚本自动发布', "<h2><a name=\"header-n179\" class=\"md-header-anchor md-print-anchor\" href=\"af://n179\"> </a><span>步骤</span></h2>
 <h3><a name=\"header-n180\" class=\"md-header-anchor md-print-anchor\" href=\"af://n180\"> </a><span>准备过程</span></h3>
 <p>	<span>到项目路径下找到build.bat并运行之，会在target目录生成一个jar包。</span></p>
 <h3><a name=\"header-n182\" class=\"md-header-anchor md-print-anchor\" href=\"af://n182\"> </a><span>发布过程</span></h3>
