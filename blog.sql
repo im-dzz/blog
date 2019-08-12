@@ -4,6 +4,7 @@ serialno int auto_increment primary key,
 title varchar(100) not null unique,
 sub_title varchar(100),
 content text,
+classification varchar(30),
 create_date datetime,
 update_date datetime
 );
@@ -91,4 +92,4 @@ tail -f /httx/log/yxf/out.log
 </code></pre>
 <p><span>以后再发布应用时，只需要在本地先编译好jar包，然后在服务器上sh deploy.sh即可.</span></p>
 <p>&nbsp;</p>
-", sysdate(), sysdate()); 
+", 'linux', sysdate(), sysdate()); 

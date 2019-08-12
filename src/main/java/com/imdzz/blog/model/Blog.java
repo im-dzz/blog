@@ -15,6 +15,7 @@ public class Blog {
 	String title;
 	String subTitle;
 	String content;
+	String classification;
 	Date createDate;
 	Date updateDate;
 	
