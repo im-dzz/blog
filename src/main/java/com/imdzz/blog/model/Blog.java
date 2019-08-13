@@ -16,6 +16,7 @@ public class Blog {
 	String subTitle;  // 副标题/摘要
 	String content;   // 正文
 	String classification;  // 类别
+    int readNum;  // 阅读数
 	Date createDate;  // 创建时间
 	Date updateDate;  // 更新时间
 	

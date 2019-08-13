@@ -16,14 +16,14 @@ import com.imdzz.blog.model.Blog;
 import com.imdzz.blog.service.BlogService;
 
 @RestController
-@RequestMapping("/blogs")
+@RequestMapping("")
 public class BlogController {
 	@Autowired
 	BlogService blogService;
 	
 	Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
-	@GetMapping()
+	@GetMapping(path = {"/", "blogs"})
 	public ModelAndView home(Model model) {
 		logger.info("blogs接口：");
 		List<Blog> blogs = blogService.findAllBlogs();

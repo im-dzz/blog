@@ -5,11 +5,11 @@ title varchar(100) not null unique,
 sub_title varchar(100),
 content text,
 classification varchar(30),
+read_num int default(0),
 create_date datetime,
 update_date datetime
 );
 
-INSERT into blog values(0 ,'0101', '第一篇博客', '博客博客', 'something', sysdate(), sysdate()); 
 INSERT into blog values(0 , 'Linux: 发布应用', '使用脚本自动发布', "<h2><a name=\"header-n179\" class=\"md-header-anchor md-print-anchor\" href=\"af://n179\"> </a><span>步骤</span></h2>
 <h3><a name=\"header-n180\" class=\"md-header-anchor md-print-anchor\" href=\"af://n180\"> </a><span>准备过程</span></h3>
 <p>	<span>到项目路径下找到build.bat并运行之，会在target目录生成一个jar包。</span></p>
@@ -80,7 +80,7 @@ tail -f /httx/log/yxf/out.log
 ID=`ps -ef | grep blog | grep -v grep | awk &#39;{print $2}&#39;`
 echo $ID
 kill -9 $ID &amp;&amp; rm -f blog-1.0-SNAPSHOT.jar*
-echo &quot;killed $ID&quot; 
+echo &quot;killed $ID&quot;
 echo &quot;---------------&quot;
 
 # 这条命令执行后会弹出一个文件选择窗口，选择编译好的jar包即可
@@ -92,4 +92,4 @@ tail -f /httx/log/yxf/out.log
 </code></pre>
 <p><span>以后再发布应用时，只需要在本地先编译好jar包，然后在服务器上sh deploy.sh即可.</span></p>
 <p>&nbsp;</p>
-", 'linux', sysdate(), sysdate()); 
+", 'LINUX', 0, sysdate(), sysdate());

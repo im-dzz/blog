@@ -62,7 +62,7 @@
 		    <div class="container">
 			    <header class="blog-post-header">
 				    <h2 class="title mb-2" th:text="${Blog.blog.title}"></h2>
-				    <div class="meta mb-3"><span class="date" th:text="${Blog.blog.createDate}"></span><span class="time">5 min read</span><span class="comment"><a href="#">4 comments</a></span></div>
+				    <div class="meta mb-3"><span class="date" th:text="发布时间：+${Blog.blog.createDate}"></span><span class="time" th:text="阅读数：+${blog.readNum}"></span><span class="comment"><a href="#">4 comments</a></span></div>
 			    </header>
 			    
 			    <div class="blog-post-body">
