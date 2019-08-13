@@ -11,12 +11,12 @@ import lombok.Data;
 @Data
 public class Blog {
 	@Id
-	int serialno; 
-	String title;
-	String subTitle;
-	String content;
-	String classification;
-	Date createDate;
-	Date updateDate;
+	int serialno;  // 主键
+	String title;   // 标题
+	String subTitle;  // 副标题/摘要
+	String content;   // 正文
+	String classification;  // 类别
+	Date createDate;  // 创建时间
+	Date updateDate;  // 更新时间
 	
 }
