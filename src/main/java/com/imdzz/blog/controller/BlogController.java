@@ -16,26 +16,36 @@ import com.imdzz.blog.model.Blog;
 import com.imdzz.blog.service.BlogService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("blogs")
 public class BlogController {
 	@Autowired
-	BlogService blogService;
+	private BlogService blogService;
+
+	private Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
-	Logger logger = LoggerFactory.getLogger(BlogController.class);
-	
-	@GetMapping(path = {"/", "blogs"})
+	@GetMapping()
 	public ModelAndView home(Model model) {
 		logger.info("blogs接口：");
 		List<Blog> blogs = blogService.findAllBlogs();
+		List<String> classifications = blogService.findAllClassifications();
 		model.addAttribute("blogs", blogs);
-		logger.info("列表大小是:" + blogs.size());
+		model.addAttribute("classifications", classifications);
+		logger.info("列表大小是:{};分类数量为：{}", blogs.size(), classifications.size());
 		return new ModelAndView("index.html", "Blog", model);
 	}
 	
-	@GetMapping("{serialno}")
+	@GetMapping("findById/{serialno}")
 	public ModelAndView findBlog(@PathVariable("serialno") int id, Model model) {
 		logger.info("blogs/{serialno}:{}", id);
-		model.addAttribute("blog", blogService.findBlog(id, "").get(0));
+		model.addAttribute("blog", blogService.findBlogDTO(id, ""));
 		return new ModelAndView("blog.html", "Blog", model);
 	}
+
+    @GetMapping("findByClassification/{classification}")
+    public ModelAndView findBlogByClassification(@PathVariable("classification") String classification, Model model) {
+        logger.info("blogs/{classification}:{}", classification);
+        model.addAttribute("blogs", blogService.findBlogsByClassification(classification));
+        model.addAttribute("classifications", blogService.findAllClassifications());
+        return new ModelAndView("index.html", "Blog", model);
+    }
 }

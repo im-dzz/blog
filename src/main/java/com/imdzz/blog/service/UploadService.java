@@ -2,66 +2,62 @@ package com.imdzz.blog.service;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.imdzz.blog.model.Blog;
 import com.imdzz.blog.repository.BlogRepository;
-import com.imdzz.blog.util.DateFormatter;
 
 @Service
 public class UploadService {
 	private Logger logger = LoggerFactory.getLogger(UploadService.class);
+	
+	@Autowired
+	private BlogRepository blogRepository;
 
-	@Autowired
-	DateFormatter dateFormatter;
-	
-	@Autowired
-	BlogRepository blogRepository;
-	
-	private static final String FILE_PATH = "E:\\javaWork\\blog\\src\\main\\resources\\blogs";
+	@Value("${temp_path}")
+    private String tempPath = "";
+
+	@Value("${spring.http.multipart.location}")
+    private String blogPath;
 
 	/**
-	 * 读取指定目录下的博客并给单引号和双引号前面加上反斜杠，以便插入数据库
 	 * @return true or false
 	 * @throws Exception
 	 */
 	public boolean upload() throws Exception {
-		File filePath = new File(FILE_PATH);
+	    // 存放日志文件的路径
+		File filePath = new File(tempPath);
 		if (!filePath.isDirectory()) {
 			throw new Exception("wrong path!");
 		}
 
-		String[] fileList = filePath.list();
-        for (String s : fileList) {
-            File file = new File(FILE_PATH + "/" + s);
-            String fileName = file.getName();
+		// 读取所有的文件并将文本内容存入数据库
+        for (String name : filePath.list()) {
+			logger.info("开始处理：" + name);
+			String destPath = blogPath + "/" + name;
+			File file = new File(tempPath + "/" + name);
+			File destFile = new File(destPath);
+			file.renameTo(destFile);
 
-            long fileLength = file.length();
-            byte[] contentBytes = new byte[(int) fileLength];
-            String contentStr = "";
-            try {
-                FileInputStream fileIn = new FileInputStream(file);
-                fileIn.read(contentBytes);
-                contentStr = new String(contentBytes, StandardCharsets.UTF_8);
-                contentStr = contentStr.replaceAll("'", "\\\\'").replace("\"", "\\\\\"");
-                fileIn.close();
-                file.delete();
-            } catch (Exception e) {
-                logger.error(e.getMessage(), e);
-            }
+			if(destFile.isDirectory()){
+				logger.info(destFile.getName() + "是一个目录，跳过");
+				continue;
+			}
 
-            Blog blog = new Blog();
-            blog.setTitle(fileName);
-            blog.setContent(contentStr);
-            // 规定文件名格式：classification: xxxxxxx
-            blog.setClassification(fileName.split(":")[0]);
+			// 若是文件，就需要加入到数据库中
+			Blog blog = new Blog();
+			// 取消后缀
+			blog.setTitle(name.split("\\.")[0]);
+			blog.setContent(destPath);
+            // 规定文件名格式：classification：xxxxxxx
+            blog.setClassification(name.split("：")[0]);
             blog.setCreateDate(new Date());
             blog.setUpdateDate(new Date());
             blogRepository.save(blog);
