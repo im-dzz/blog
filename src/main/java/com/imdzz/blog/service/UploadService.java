@@ -28,10 +28,10 @@ public class UploadService {
     private String blogPath;
 
 	/**
-	 * @return true or false
+	 * @return void
 	 * @throws Exception
 	 */
-	public boolean upload() throws Exception {
+	public void upload() throws Exception {
 	    // 存放日志文件的路径
 		File filePath = new File(tempPath);
 		if (!filePath.isDirectory()) {
@@ -40,30 +40,37 @@ public class UploadService {
 
 		// 读取所有的文件并将文本内容存入数据库
         for (String name : filePath.list()) {
-			logger.info("开始处理：" + name);
-			String destPath = blogPath + "/" + name;
-			File file = new File(tempPath + "/" + name);
-			File destFile = new File(destPath);
-			file.renameTo(destFile);
+        	try{
+				logger.info("开始处理：" + name);
+				String destPath = blogPath + "/" + name;
+				File tempFile = new File(tempPath + "/" + name);
+				File destFile = new File(destPath);
+				tempFile.renameTo(destFile);
 
-			if(destFile.isDirectory()){
-				logger.info(destFile.getName() + "是一个目录，跳过");
-				continue;
+				if(destFile.isDirectory()){
+					logger.info("{}是存放图片的目录，跳过", destFile.getName());
+					continue;
+				}
+
+				// 若是文件，就需要加入到数据库中
+				Blog blog = new Blog();
+				// 取消后缀
+				String title = name.split("\\.")[0];
+				blog.setTitle(title);
+				blog.setContent(destPath);
+				// 规定文件名格式：classification：xxxxxx，如果没有写名分类则会自动归类到Others
+				String classification = title.split("：")[0];
+				if (title.equals(classification)){
+					classification = "Others";
+				}
+				blog.setClassification(classification);
+				blog.setCreateDate(new Date());
+				blog.setUpdateDate(new Date());
+				blogRepository.save(blog);
+			} catch(Exception e){
+        		logger.info(e.getMessage(), e);
 			}
-
-			// 若是文件，就需要加入到数据库中
-			Blog blog = new Blog();
-			// 取消后缀
-			blog.setTitle(name.split("\\.")[0]);
-			blog.setContent(destPath);
-            // 规定文件名格式：classification：xxxxxxx
-            blog.setClassification(name.split("：")[0]);
-            blog.setCreateDate(new Date());
-            blog.setUpdateDate(new Date());
-            blogRepository.save(blog);
         }
-		
-		return true;
 	}
 	
 }
