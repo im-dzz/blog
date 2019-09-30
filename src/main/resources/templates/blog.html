@@ -1,106 +1,67 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
+    <meta charset="utf-8" />
     <title>imdzz's Blog</title>
-    
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico"> 
-    
-    <!-- FontAwesome JS-->
-    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
-    
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/monokai-sublime.min.css">
-    
-    <!-- Theme CSS -->  
-    <link id="theme-style" rel="stylesheet" href="/css/theme-1.css">
-    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/blog.css">
+</head>
 
-</head> 
+<!-- typora的css文件会指定内边距30，需要指定 -->
+<body style="margin: 0; padding: 0;">
+<div id="left">
+    <div id="left-top">
+        <h1 id="left-title">imdzz's blog</h1>
+        <img id="icon" src="/images/duck.jpg" />
+        <div id="breaf-introd">
+            这是一家书店，你可以随便看看<br />
+        </div>
+    </div>
+    <ul id="social-list">
+        <li class="social-list-item">
+            <a href="https://github.com/im-dzz">github</a>
+        </li>
+        <li class="social-list-item">
+            <a href="https://github.com/im-dzz">小程序</a>
+        </li>
+    </ul>
+    <!--//social-list-->
+    <hr id="left-hr" style="text-alig" />
+    <ul id="menu-list">
+        <li class="menu-list-item">
+            <a href="/blog.html">主页 </a>
+        </li>
+        <li class="menu-list-item">
+            <a href="https://github.com/im-dzz">关于作者</a>
+        </li>
+    </ul>
+    <!--//social-list-->
+    <div id="left-bottom">
+        <span id="left-bottom-cont">书店网站开源，源码请点击</span>
+        <a href="https://github.com/im-dzz/blog">这里</a>
+    </div>
+</div>
 
-<body>
-    <header class="header text-center">	    
-	    <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">imdzz's Blog</a></h1>
-        
-	    <nav class="navbar navbar-expand-lg navbar-dark" >
-           
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-			</button>
+<div id="mid">
+    <div id="mid-blog">
+        <header id="mid-blog-header">
+            <h2 id="mid-blog-header-title" th:text="${Blog.blog.title}"></h2>
+            <div id="mid-blog-header-disc">
+                <span class="date" th:text="发布时间：+${Blog.blog.createDate}"></span>
+                <span class="time" th:text="阅读数：+${blog.readNum}">阅读数：0</span>
+                <span class="comment"><a href="#">4 comments</a></span>
+            </div>
+        </header>
 
-			<div id="navigation" class="collapse navbar-collapse flex-column" >
-				<div class="profile-section pt-3 pt-lg-0">
-				    <img class="profile-image mb-3 rounded-circle mx-auto" src="/images/duck.jpg" alt="image" >
-
-					<div class="bio mb-3">这里是imdzz的个人博客<br></div><!--//bio-->
-					<ul class="social-list list-inline py-3 mx-auto">
-			            <li class="list-inline-item"><a href="https://github.com/im-dzz"><i class="fab fa-github-alt fa-fw"></i></a></li>
-			        </ul><!--//social-list-->
-			        <hr> 
-				</div><!--//profile-section-->
-				
-				<ul class="navbar-nav flex-column text-left">
-					<li class="nav-item">
-					    <a class="nav-link" th:href="@{'/blogs'}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-					    <a class="nav-link" href="about.html"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		<footer class="footer text-center py-2">
-			<small class="copyright">网站源码请点击 <a href="https://github.com/im-dzz/blog">这里</a></small>
-		</footer>
-    </header>
-    
-    <div class="main-wrapper">
-	    
-	    <article class="blog-post px-3 py-5 p-md-5">
-		    <div class="container">
-			    <header class="blog-post-header">
-				    <h2 class="title mb-2" th:text="${Blog.blog.title}"></h2>
-				    <div class="meta mb-3"><span class="date" th:text="发布时间：+${Blog.blog.createDate}"></span><span class="time" th:text="阅读数：+${blog.readNum}"></span><span class="comment"><a href="#">4 comments</a></span></div>
-			    </header>
-			    
-			    <div class="blog-post-body">
-				    <figure class="blog-banner">
-				        <span th:utext="${Blog.blog.content}"></span>
-				    </figure>
-				</div>
-		    </div><!--//container-->
-	    </article>
-	    
-	    <!--<section class="promo-section theme-bg-light py-5 text-center">
-		    <div class="container">
-			    <h2 class="title">Promo Section Heading</h2>
-			    <p>You can use this section to promote your side projects etc. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. </p>
-                <figure class="promo-figure">
-			        <a href="#" target="_blank"><img class="img-fluid" src="assets/images/promo-banner.jpg" alt="image"></a>
-			    </figure>
-		    </div>//container
-	    </section>--><!--//promo-section-->
-    </div><!--//main-wrapper-->
-    
-       
-    <!-- Javascript -->          
-    <script src="assets/plugins/jquery-3.3.1.min.js"></script>
-    <script src="assets/plugins/popper.min.js"></script> 
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
-    
-    <!-- Page Specific JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-
-    <!-- Custom JS -->
-    <script src="/js/blog.js"></script>
-    
-    <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
-    <script src="/js/demo/style-switcher.js"></script>
-    
-
+        <div class="blog-post-body">
+            <figure class="blog-banner">
+                <span th:utext="${Blog.blog.content}">
+                </span>
+            </figure>
+        </div>
+    </div>
+</div>
 </body>
-</html> 
 
+</html>
