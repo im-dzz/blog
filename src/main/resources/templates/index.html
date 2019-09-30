@@ -1,98 +1,74 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <title>imdzz's Blog</title>
-    
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico"> 
-    
-    <!-- FontAwesome JS-->
-    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
-    
-    <!-- Theme CSS 需要注意的是，这些都是都是相对于当前url的 -->
-    <link id="theme-style" rel="stylesheet" href="/css/theme-1.css">
-
-</head> 
-
-<body>
-<header class="header text-center">
-	<h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">imdzz's Blog</a></h1>
-
-	<nav class="navbar navbar-expand-lg navbar-dark" >
-
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div id="navigation" class="collapse navbar-collapse flex-column" >
-			<div class="profile-section pt-3 pt-lg-0">
-				<img class="profile-image mb-3 rounded-circle mx-auto" src="/images/duck.jpg" alt="image" >
-
-				<div class="bio mb-3">这里是imdzz的个人博客<br></div><!--//bio-->
-				<ul class="social-list list-inline py-3 mx-auto">
-					<li class="list-inline-item"><a href="https://github.com/im-dzz"><i class="fab fa-github-alt fa-fw"></i></a></li>
-				</ul><!--//social-list-->
-				<hr>
-			</div><!--//profile-section-->
-
-			<ul class="navbar-nav flex-column text-left">
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{'/blogs'}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+		<meta charset="utf-8" />
+    	<title>imdzz's Blog</title>
+	    <link rel="shortcut icon" href="favicon.ico"> 
+	    <link rel="stylesheet" href="/css/index.css">
+	</head>
+	<body>
+		<div id="left">
+			<div id="left-top">
+				<h1 id="left-title">imdzz's blog</h1>
+				<img id="icon" src="/images/duck.jpg"/>
+				<div id="breaf-introd">
+					这是一家书店，你可以随便看看<br />
+				</div>
+			</div>
+			<ul id="social-list">
+				<li class="social-list-item">
+					<a href="https://github.com/im-dzz">github</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="about.html"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
+				<li class="social-list-item">
+					<a href="https://github.com/im-dzz">小程序</a>
+				</li>
+			</ul><!--//social-list-->
+			<hr id="left-hr" />
+			<ul id="menu-list">
+				<li class="menu-list-item">
+					<a th:href="@{'/blogs'}">主页	</a>
+				</li>
+				<li class="menu-list-item">
+					<a href="https://github.com/im-dzz">关于作者</a>
+				</li>
+			</ul><!--//social-list-->
+			<div id="left-bottom">
+				<span id="left-bottom-cont">书店网站开源，源码请点击</span><a href="https://github.com/im-dzz/blog">这里</a>
+			</div>
+		</div>
+		
+		<div id="mid">
+			<div id="blog-list" th:each="blog : ${Blog.blogs}">
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" th:src="@{'/images/blog/' + ${blog.classification} + '.jpg'}"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a th:href="@{'/blogs/findById/' + ${blog.serialno}}" th:text="${blog.title}">格林童话</a></h3>
+
+						<span class="blog-item-right-classification" th:text="${blog.classification}">分类</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate" th:text="${blog.createDate}">创建时间</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">阅读数：100</span>
+					</div>
+				</div>
+				<hr />
+
+			</div>
+		</div>
+
+		<div id="right">
+			<ul id="classifications">
+				<li class="classification" th:each="classification : ${Blog.classifications}">
+					<a th:href="@{'/blogs/findByClassification/' + ${classification}}">
+						<img class="classification-img" th:src="@{'/images/blog/' + ${classification} + '.jpg'}">
+						<span class="classification-cont" th:text="${classification}"></span>
+					</a>
 				</li>
 			</ul>
 		</div>
-	</nav>
-	<footer class="footer text-center py-2">
-		<small class="copyright">网站源码请点击 <a href="https://github.com/im-dzz/blog">这里</a></small>
-	</footer>
-</header>
-    
-	<!-- 博客列表 -->
-    <div class="main-wrapper">
-	    <section class="blog-list px-3 py-5 p-md-5"  style="width:80%; float:left">
-		    <div class="container">
-			    <div class="item mb-5"  th:each="blog : ${Blog.blogs}">
-				    <div class="media">
-					    <img class="mr-3 img-fluid post-thumb d-none d-md-flex" th:src="@{'/images/blog/' + ${blog.classification} + '.jpg'}" alt="image"/>
-					    <div class="media-body">
-						    <h3 class="title mb-1"><a th:href="@{'/blogs/findById/' + ${blog.serialno}}" th:text="${blog.title}"></a></h3>
-						    <div class="meta mb-1"><span class="date" th:text="${blog.classification}"></span><span class="time" th:text="${blog.createDate}"/><span class="comment"><a href="#">0评论</a></span></div>
-						    <div class="intro" th:text="${blog.subTitle}"></div>
-						    <!-- <a class="more-link" href="blog-post.html">Read more &rarr;</a>  -->
-					    </div><!--//media-body-->
-				    </div><!--//media-->
-			    </div><!--//item-->
-			    
-			    <!-- <nav class="blog-nav nav nav-justified my-5">
-				  <a class="nav-link-prev nav-item nav-link rounded-left" href="index.html">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-				  <a class="nav-link-next nav-item nav-link rounded-right" href="blog-list.html">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-				</nav> -->
-		    </div>
-	    </section>
-    </div><!--//main-wrapper-->
+	</body>
+</html>
 
-	<aside style="display:float; float:right; width:15%; margin-right:10px; margin-top:80px">
-		<ul>
-			<li th:each="classification : ${Blog.classifications}">
-                <a th:href="@{'/blogs/findByClassification/' + ${classification}}">
-                    <img style="height:50px; width:50px;" th:src="@{'/images/blog/' + ${classification} + '.jpg'}">
-                    <span th:text="${classification}"></span>
-                </a>
-			</li>
-		</ul>
-	</aside>
-       
-    <!-- Javascript -->          
-    <script src="assets/plugins/jquery-3.3.1.min.js"></script>
-    <script src="assets/plugins/popper.min.js"></script> 
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
-
-</body>
-</html> 
 
