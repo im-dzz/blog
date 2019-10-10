@@ -13,6 +13,7 @@ import com.imdzz.blog.dto.BlogDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.imdzz.blog.model.Blog;
@@ -22,12 +23,21 @@ import com.imdzz.blog.repository.BlogRepository;
 public class BlogService {
 	private Logger logger = LoggerFactory.getLogger(BlogService.class);
 
-
 	@Autowired
     private BlogRepository blogRepository;
+
+	@Autowired
+	RedisTemplate redisTemplate;
 	
 	public BlogDTO findBlogDTO(Integer id, String title) {
-		return fillContent(blogRepository.getOne(id));
+	    Blog blog = blogRepository.getOne(id);
+	    blog.setReadNum(blog.getReadNum() + 1);
+	    blogRepository.save(blog);
+
+		BlogDTO blogDTO = fillContent(blog);
+
+
+		return blogDTO;
 	}
 	
 	public List<Blog> findAllBlogs(){

@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +21,31 @@ import com.imdzz.blog.service.BlogService;
 public class BlogController {
 	@Autowired
 	private BlogService blogService;
+	@Autowired
+	RedisTemplate redisTemplate;
 
 	private Logger logger = LoggerFactory.getLogger(BlogController.class);
-	
+
+	/**
+	 * 访问主页，记录访客
+	 * @param model
+	 * @return
+	 */
 	@GetMapping()
 	public ModelAndView home(Model model) {
 		logger.info("blogs接口：");
+		if (!redisTemplate.hasKey("visitorNum")){
+			redisTemplate.opsForValue().set("visitorNum", 0);
+		}
+		int visitorNum = (int) redisTemplate.opsForValue().get("visitorNum");
+		logger.info("redis:visitorNum={}", visitorNum);
+		redisTemplate.opsForValue().set("visitorNum", ++visitorNum);
+
 		List<Blog> blogs = blogService.findAllBlogs();
 		List<String> classifications = blogService.findAllClassifications();
 		model.addAttribute("blogs", blogs);
 		model.addAttribute("classifications", classifications);
+		model.addAttribute("visitorNum", visitorNum);
 		logger.info("列表大小是:{};分类数量为：{}", blogs.size(), classifications.size());
 		return new ModelAndView("index.html", "Blog", model);
 	}
