@@ -1,0 +1,231 @@
+html,body{
+	/* 只有设置了html和body的大小，子类才可以用%号指定大小*/
+	height: 100%;
+	width: 100%;
+	background-color: rgb(105,105,105);
+
+}
+a{
+	text-decoration: none;
+}
+ul li{
+	list-style: none;
+	margin: 0;
+}
+
+ #left-chat{
+ 	display: none;
+ 	width: 20%;
+	height: 100%;
+	/* fixed会使该div脱离文档流，所以下面的mid需要有20%的左外边距,否则mid会被覆盖 */
+	position: fixed;
+	background-color: rgb(112,128,144);
+ }
+ #chat-box{
+ 	background-color: ghostwhite;
+ 	width: 96%;
+ 	height: 80%;
+ 	margin: auto;
+ 	margin-top: 2%;
+ 	border: 3px solid darkslategrey;
+ }
+ #chat-input{
+ 	background-color: ghostwhite;
+ 	width: 96%;
+ 	height: 20px;
+ 	font-size: 15px;
+ 	margin: auto;
+ 	margin-top: 2%;
+ 	border: 3px solid darkslategrey;
+ }
+
+#left{
+	display: block;
+	width: 20%;
+	height: 100%;
+	/* fixed会使该div脱离文档流，所以下面的mid需要有20%的左外边距,否则mid会被覆盖 */
+	position: fixed;
+	background-color: rgb(112,128,144);
+}
+#left-visitor{
+	font-size: 12px;
+	text-align: center;
+	color: honeydew;
+	background-color:#70717D;
+	margin: auto;
+}
+#left-top{
+	text-align: center;
+}
+#left-title{
+	font-family:"微软雅黑";
+	color: white;
+	margin-top: 60px;
+}
+#icon{
+	width: 100px;
+	height: 100px;
+	border-radius:50%;
+	margin-top: 30px;
+	/* 旋转动画 */
+    -webkit-animation:icon 1s linear infinite;  /* Safari and Chrome */
+    -moz-animation:icon 1s linear infinite; /* Firefox */
+	-o-animation:icon 1s linear infinite; /* Opera */
+	box-shadow: 1px 1px 20px 10px rgba(0,0,0,.5);
+    /*考虑浏览器兼容性 */
+    -moz-box-shadow: 1px 1px 20px 10px rgba(0,0,0,.5);
+    -webkit-box-shadow: 1px 1px 20px 10px rgba(0,0,0,.5);
+}
+#icon:hover{
+	width: 110px;
+	height: 110px;
+	border-radius:50%;
+	margin-top: 25px;
+	filter:Invert();
+}
+#breaf-introd{
+	margin-top: 10px;
+	color:#FFFFFF;
+}
+#social-list{
+	text-align: center;
+	/* 在浏览器中ul和li有默认40的margin和padding边距*/
+	margin: 0;
+	padding: 0;
+	margin-top: 20px;
+}
+.social-list-item{
+	list-style: none;
+	margin-top: 5px;
+}
+.social-list-item a{
+	text-decoration: none;
+	font-size: 16px;
+}
+#left-hr{
+	width: 60%;
+	margin-top: 20px;
+}
+#menu-list{
+	text-align: center;
+	/* 在浏览器中ul和li有默认40的margin和padding边距*/
+	margin: 0;
+	padding: 0;
+	margin-top: 20px;
+}
+.menu-list-item{
+	list-style: none;
+	margin-top: 5px;
+}
+#menu-list a{
+	text-decoration: none;
+	font-family: "微软雅黑";
+	font-size: 25px;
+	color: green;
+}
+#left-bottom{
+	width: 100%;
+	height: 80px;
+	background-color: black;
+	position: absolute;
+	bottom: 20px;
+	text-align: center;
+	color: white;
+}
+#left-bottom-cont{
+	display: block;
+	margin-top: 25px;
+}
+
+#mid{
+	width: 65%;
+	height: auto;
+	/* 靠左浮动，并且离左边框20% */
+	float: left;
+	margin-left: 20%;
+	background-color: rgb(105,105,105);
+}
+#blog-list{
+	width: 80%;
+	height: 100%;
+	/* 可以让其左右居中对齐 */
+	margin: 0 auto;
+	background-color: rgb(105,105,105);
+}
+.blog-item{
+	display: block;
+	width: 100%;
+	height: 100px;
+	background-color: rgb(190, 190, 190);
+}
+.blog-item-left-img{
+	width: 80px;
+	height: 80px;
+	/* inline:默认。此元素会被显示为内联元素，无法设置width和height，元素前后没有换行符。<p><div><h1><li>本身就是块级元素
+	 * inline-block:行内块元素，既可以设置高度和宽度，又不会换行
+	 * block:显示为块级元素，会独自占一行
+	 * none：不显示 */
+	display: inline-block;
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.blog-item-right{
+	width: auto;
+	height: 100%;
+	display: inline-block;
+	float: left;
+	margin-left: 10px;
+	background-color: rgb(190, 190, 190);
+}
+.blog-item-right-title{
+	font-size: large;
+	
+}
+.blog-item-right-title a{
+	color: rgb(54, 100, 139);
+}
+
+#right{
+	width: 15%;
+	height: auto;
+	/* position:fixed可以指定该容器相对于浏览器窗口的位置，页面滚动时，它不会动；此时它只能通过top、bottom、left和right指定位置 */
+	/* absolute可定位于相对于包含它的元素的指定坐标。此元素的位置可通过 "left"、"top"、"right" 以及 "bottom" 属性来规定。 */
+	/* relative可将其移至相对于其正常位置的地方，因此 "left:20" 会将元素移至元素正常位置左边 20 个像素的位置 */
+	/* static默认。位置设置为 static 的元素，它始终会处于页面流给予的位置（static 元素会忽略任何 top、bottom、left 或 right 声明）。 */
+	position: fixed;
+	right: 0;
+	top: 15%;
+	background-color: darkcyan;
+}
+#classifications{
+}
+.classification{
+	float: left;
+	margin-bottom: 5px;
+	background-color: bisque;
+}
+.classification-img{
+	width: 35px;
+	height: 35px;
+	vertical-align: bottom;
+}
+.classification-cont{
+	font-size: 25px;
+}
+
+/*动画*/
+@keyframes icon {
+  0% {transform : rotate(360deg);}
+  100% {transform : rotate(0deg);}
+}
+
+@-webkit-keyframes icon {  /* Safari and Chrome */
+    0%{-webkit-transform : rotate(360deg);}
+  100%{-webkit-transform : rotate(0deg);}
+}
+
+@-moz-keyframes icon {  /* Firefox */
+    0%{-webkit-transform : rotate(360deg);}
+  100%{-webkit-transform : rotate(0deg);}
+}

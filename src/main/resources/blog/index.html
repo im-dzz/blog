@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+		<meta charset="utf-8" />
+    	<title>imdzz's Blog</title>
+	    <link rel="shortcut icon" href="favicon.ico"> 
+	    <link rel="stylesheet" href="css/index.css">
+	</head>
+	<body>
+		<div id="left">
+			<p id="left-visitor">访问人次：<span >20</span></p>
+			<div id="left-top">
+				<h1 id="left-title">imdzz's blog</h1>
+				<!--
+                	作者：offline
+                	时间：2019-10-10
+                	描述：后期添加功能，每当有人发出消息，该图片就发出心跳
+                -->
+				<img id="icon" src="img/黑色漩涡.jpg" onclick="chat()"/>
+
+				<div id="breaf-introd">
+					这是一家书店，你可以随便看看<br />
+				</div>
+			</div>
+			<ul id="social-list">
+				<li class="social-list-item">
+					<a href="https://github.com/im-dzz">github</a>
+				</li>
+				<li class="social-list-item">
+					<a href="https://github.com/im-dzz">小程序</a>
+				</li>
+			</ul><!--//social-list-->
+			<hr id="left-hr" />
+			<ul id="menu-list">
+				<li class="menu-list-item">
+					<a href="blog.html">主页	</a>
+				</li>
+				<li class="menu-list-item">
+					<a href="https://github.com/im-dzz">关于作者</a>
+				</li>
+			</ul><!--//social-list-->
+			<div id="left-bottom">
+				<span id="left-bottom-cont">书店网站开源，源码请点击</span><a href="https://github.com/im-dzz/blog">这里</a>
+			</div>
+		</div>
+		
+		<div id="left-chat">
+			<div id="chat-box">
+				
+			</div>
+			<form action="/sendMsg" method="post">
+				<input id="chat-input" type="text" size="150"/>
+			</form>
+		</div>
+		
+		<div id="mid">
+			<div id="blog-list">
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+				<div class="blog-item">
+					<div class="blog-item-left">
+						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
+					</div>
+					<div class="blog-item-right">
+						<h3 class="blog-item-right-title"><a href="xxxx.xxxx">格林童话</a></h3>
+
+						<span class="blog-item-right-classification">
+							分类：儿童读物
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-createdate">
+							创建时间：2019-09-29 15:55:55
+						</span>
+						&nbsp;&nbsp;
+						<span class="blog-item-right-readNum">
+							阅读数：100
+						</span>
+					</div>
+				</div>
+				<hr />
+			</div>
+		</div>
+		
+		<div id="right">
+			<ul id="classifications">
+				<li class="classification">
+					<img class="classification-img" src="img/blog/blog-post-thumb-3.jpg"/>
+					<span class="classification-cont">儿童文学</span>
+				</li>
+				<li class="classification">
+					<img class="classification-img" src="img/blog/blog-post-thumb-3.jpg"/>
+					<span class="classification-cont">儿童文学</span>
+
+				</li>
+				<li class="classification">
+					<img class="classification-img" src="img/blog/blog-post-thumb-3.jpg"/>
+					<span class="classification-cont">儿童文学</span>
+				</li>
+			</ul>
+		</div>
+		<script>
+			function chat(){
+				document.getElementById("left").style.display="none";
+				document.getElementById("left-chat").style.display="block";
+			}
+		</script>
+		<script>
+			function searchList(){
+				alert("haol");
+			}
+		</script>
+	</body>
+</html>
+
+
