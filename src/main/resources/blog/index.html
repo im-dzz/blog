@@ -5,6 +5,8 @@
     	<title>imdzz's Blog</title>
 	    <link rel="shortcut icon" href="favicon.ico"> 
 	    <link rel="stylesheet" href="css/index.css">
+	    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="js/blog.js" ></script>
 	</head>
 	<body>
 		<div id="left">
@@ -42,16 +44,18 @@
 			<div id="left-bottom">
 				<span id="left-bottom-cont">书店网站开源，源码请点击</span><a href="https://github.com/im-dzz/blog">这里</a>
 			</div>
+			
+			<div id="left-chat">
+				<div id="chat-box">
+				
+				</div>
+				<textarea id="chat-input" name="reworkmes" rows="3" cols="40" maxlength="100" placeholder="说点什么...">
+				</textarea>
+				<input id="chat-send" type="button" onclick="charSend()" value="发送" />
+			</div>
 		</div>
 		
-		<div id="left-chat">
-			<div id="chat-box">
-				
-			</div>
-			<form action="/sendMsg" method="post">
-				<input id="chat-input" type="text" size="150"/>
-			</form>
-		</div>
+		
 		
 		<div id="mid">
 			<div id="blog-list">
@@ -329,13 +333,18 @@
 		</div>
 		<script>
 			function chat(){
-				document.getElementById("left").style.display="none";
-				document.getElementById("left-chat").style.display="block";
+				$("#left-title").toggle();
+				$("#breaf-introd").toggle();
+				$("#social-list").toggle();
+				$("#menu-list").toggle();
+				$("left-bottom").toggle();
+				$("#left-chat").toggle();				
 			}
-		</script>
-		<script>
-			function searchList(){
-				alert("haol");
+			function charSend(){
+				$.post("/chat/send", {"msg":$("#chat-input").val()},
+  					function(status){
+    					alert(status);
+  					});
 			}
 		</script>
 	</body>

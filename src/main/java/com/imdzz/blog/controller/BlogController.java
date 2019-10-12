@@ -2,6 +2,7 @@ package com.imdzz.blog.controller;
 
 import java.util.List;
 
+import com.imdzz.blog.dto.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,8 @@ public class BlogController {
 		model.addAttribute("blogs", blogs);
 		model.addAttribute("classifications", classifications);
 		model.addAttribute("visitorNum", visitorNum);
+		// 当页面上需要form表单时，打开页面时必须传入一个对象，否则会找不到
+		model.addAttribute("message", new Message());
 		logger.info("列表大小是:{};分类数量为：{}", blogs.size(), classifications.size());
 		return new ModelAndView("index.html", "Blog", model);
 	}

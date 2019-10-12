@@ -16,27 +16,42 @@ ul li{
  #left-chat{
  	display: none;
  	width: 20%;
-	height: 100%;
+	height: 80%;
 	/* fixed会使该div脱离文档流，所以下面的mid需要有20%的左外边距,否则mid会被覆盖 */
 	position: fixed;
 	background-color: rgb(112,128,144);
  }
  #chat-box{
  	background-color: ghostwhite;
+ 	opacity:0.5;
  	width: 96%;
  	height: 80%;
  	margin: auto;
  	margin-top: 2%;
  	border: 3px solid darkslategrey;
  }
- #chat-input{
- 	background-color: ghostwhite;
+#chat-input{
+	background-color: ghostwhite;
  	width: 96%;
- 	height: 20px;
+ 	height: 70px;
+ 	resize: none;
  	font-size: 15px;
  	margin: auto;
  	margin-top: 2%;
  	border: 3px solid darkslategrey;
+}
+ #chat-send{
+ 	width: 43px;
+ 	height: 25px;
+ 	color: honeydew;
+ 	text-align: center;
+ 	border: 1px solid black;
+ 	background-color: midnightblue;
+ 	float: right;
+ 	margin-right: 10px;
+ }
+ #chat-send:hover{
+ 	background-color:#4A89DC;
  }
 
 #left{
@@ -62,10 +77,10 @@ ul li{
 	margin-top: 60px;
 }
 #icon{
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	border-radius:50%;
-	margin-top: 30px;
+	margin-top: 10px;
 	/* 旋转动画 */
     -webkit-animation:icon 1s linear infinite;  /* Safari and Chrome */
     -moz-animation:icon 1s linear infinite; /* Firefox */
@@ -76,10 +91,10 @@ ul li{
     -webkit-box-shadow: 1px 1px 20px 10px rgba(0,0,0,.5);
 }
 #icon:hover{
-	width: 110px;
-	height: 110px;
+	width: 90px;
+	height: 90px;
 	border-radius:50%;
-	margin-top: 25px;
+	margin-top: 8px;
 	filter:Invert();
 }
 #breaf-introd{

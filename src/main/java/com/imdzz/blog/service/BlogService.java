@@ -35,8 +35,6 @@ public class BlogService {
 	    blogRepository.save(blog);
 
 		BlogDTO blogDTO = fillContent(blog);
-
-
 		return blogDTO;
 	}
 	

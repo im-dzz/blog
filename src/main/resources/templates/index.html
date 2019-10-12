@@ -5,7 +5,9 @@
     	<title>imdzz's Blog</title>
 	    <link rel="shortcut icon" href="favicon.ico">
 	    <link rel="stylesheet" href="/css/index.css">
-	</head>
+        <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/js/blog.js" ></script>
+    </head>
 	<body style="margin: 0; padding: 0;">
 		<div id="left">
 			<p id="left-visitor">访问人次：<span th:text="${Blog.visitorNum}"></span></p>
@@ -41,18 +43,20 @@
 			</ul><!--//social-list-->
 
 			<div id="left-bottom">
-				<span id="left-bottom-cont">书店网站开源，源码请点击</span><a href="https://github.com/im-dzz/blog">这里</a>
+				<span id="left-bottom-cont">本网站开源，源码请点击</span><a href="https://github.com/im-dzz/blog">这里</a>
+			</div>
+
+			<div id="left-chat">
+				<div id="chat-box">
+
+				</div>
+				<textarea id="chat-input" name="reworkmes" rows="3" cols="40" maxlength="100" placeholder="说点什么...">
+				</textarea>
+				<input id="chat-send" type="button" onclick="sendMessage()" value="发送" />
 			</div>
 		</div>
 
-		<div id="left-chat">
-			<div id="chat-box">
 
-			</div>
-			<form action="/sendMsg" method="post">
-				<input id="chat-input" type="text" size="150"/>
-			</form>
-		</div>
 
 		<div id="mid">
 			<div id="blog-list" th:each="blog : ${Blog.blogs}">
@@ -86,12 +90,7 @@
 			</ul>
 		</div>
 
-		<script>
-			function chat(){
-				document.getElementById("left").style.display="none";
-				document.getElementById("left-chat").style.display="block";
-			}
-		</script>
+        <input id="userId" type="text" value="122" />
 	</body>
 </html>
 
