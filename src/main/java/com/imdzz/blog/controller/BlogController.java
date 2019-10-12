@@ -63,8 +63,15 @@ public class BlogController {
     @GetMapping("findByClassification/{classification}")
     public ModelAndView findBlogByClassification(@PathVariable("classification") String classification, Model model) {
         logger.info("blogs/{classification}:{}", classification);
+        if (!redisTemplate.hasKey("visitorNum")){
+            redisTemplate.opsForValue().set("visitorNum", 0);
+        }
+        int visitorNum = (int) redisTemplate.opsForValue().get("visitorNum");
+        logger.info("redis:visitorNum={}", visitorNum);
+
         model.addAttribute("blogs", blogService.findBlogsByClassification(classification));
         model.addAttribute("classifications", blogService.findAllClassifications());
+        model.addAttribute("visitorNum", visitorNum);
         return new ModelAndView("index.html", "Blog", model);
     }
 }
