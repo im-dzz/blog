@@ -5,6 +5,7 @@
     	<title>imdzz's Blog</title>
 	    <link rel="shortcut icon" href="favicon.ico">
 	    <link rel="stylesheet" href="/css/index.css">
+        <!-- jquery和自己的js文件引入顺序不能颠倒，blog.js依赖jquery，需要放到后面 -->
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/blog.js" ></script>
     </head>
@@ -48,15 +49,16 @@
 
 			<div id="left-chat">
 				<div id="chat-box">
-
+                    <div class="message-box">
+                        <p class="message-cont"></p>
+                    </div>
 				</div>
 				<textarea id="chat-input" name="reworkmes" rows="3" cols="40" maxlength="100" placeholder="说点什么...">
 				</textarea>
+
 				<input id="chat-send" type="button" onclick="sendMessage()" value="发送" />
 			</div>
 		</div>
-
-
 
 		<div id="mid">
 			<div id="blog-list" th:each="blog : ${Blog.blogs}">
@@ -89,8 +91,6 @@
 				</li>
 			</ul>
 		</div>
-
-        <input id="userId" type="text" value="122" />
 	</body>
 </html>
 

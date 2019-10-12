@@ -47,7 +47,12 @@
 			
 			<div id="left-chat">
 				<div id="chat-box">
-				
+					<div class="message-box">
+                        <p class="message-cont">你好，我是小米</p>
+                    </div>
+                    <div class="message-box">
+                        <p class="message-cont">你好，我是小米</p>
+                    </div>
 				</div>
 				<textarea id="chat-input" name="reworkmes" rows="3" cols="40" maxlength="100" placeholder="说点什么...">
 				</textarea>
@@ -59,6 +64,7 @@
 		
 		<div id="mid">
 			<div id="blog-list">
+				<input type="button" value="点击" onclick="addMessage()" />
 				<div class="blog-item">
 					<div class="blog-item-left">
 						<img class="blog-item-left-img" src="img/blog/default.jpg"/>
@@ -337,15 +343,22 @@
 				$("#breaf-introd").toggle();
 				$("#social-list").toggle();
 				$("#menu-list").toggle();
-				$("left-bottom").toggle();
+				$("#left-bottom").toggle();
 				$("#left-chat").toggle();				
 			}
 			function charSend(){
 				$.post("/chat/send", {"msg":$("#chat-input").val()},
   					function(status){
     					alert(status);
+    					$("#chat-input").empty();
   					});
 			}
+            function addMessage(){
+            	var con = $("#chat-box").html();
+//          	alert("button clicked!" + con);
+            	var temp = con + "<div class=\"message-box\"><p class=\"message-cont\">你好，我是小米</p></div>";
+            	 $("#chat-box").html(temp);
+            }
 		</script>
 	</body>
 </html>

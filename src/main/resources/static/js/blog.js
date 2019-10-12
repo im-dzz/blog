@@ -1,5 +1,10 @@
+var socket;
+var date = new Date();
+var userId =  date.getMinutes() + "" + parseInt(Math.random() * 10000) + "" + date.getMilliseconds();
+
 /* 页面加载完成后就打开websocket连接*/
 $(document).ready(openSocket());
+//window.onload=openSocket();
 
 /* 切换左侧无关内容，显示聊天框 */
 function chat(){
@@ -7,7 +12,7 @@ function chat(){
 	$("#breaf-introd").toggle();
 	$("#social-list").toggle();
 	$("#menu-list").toggle();
-	$("left-bottom").toggle();
+	$("#left-bottom").toggle();
 	$("#left-chat").toggle();
 }
 
@@ -19,13 +24,13 @@ function chat(){
 //  		});
 //}
 
-var socket;
 function openSocket() {
+    console.log("当前用户的id是:" + userId);
     if(typeof(WebSocket) == "undefined") {
         console.log("您的浏览器不支持WebSocket");
     }else{
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-        var socketUrl = "http://localhost:1234/im/"+$("#userId").val();
+        var socketUrl = "http://localhost:1234/im/"+userId;
         socketUrl = socketUrl.replace("https","ws").replace("http","ws");
         console.log(socketUrl)
         socket = new WebSocket(socketUrl);
@@ -38,6 +43,7 @@ function openSocket() {
         socket.onmessage = function(msg) {
             console.log("收到了来自服务器的消息：" + msg.data);
            //发现消息进入    开始处理前端触发逻辑
+           addMessage(msg.data);
         };
         //关闭事件
         socket.onclose = function() {
@@ -59,4 +65,11 @@ function sendMessage() {
         socket.send($("#chat-input").val());
     	$("#chat-input").val("");
     }
+}
+
+function addMessage(msgText){
+    var con = $("#chat-box").html();
+//          	alert("button clicked!" + con);
+    var temp = con + "<div class=\"message-box\"><p class=\"message-cont\">" + msgText + "</p></div>";
+    $("#chat-box").html(temp);
 }

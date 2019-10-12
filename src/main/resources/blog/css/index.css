@@ -31,7 +31,24 @@ ul li{
  	margin: auto;
  	margin-top: 2%;
  	border: 3px solid darkslategrey;
+ 	/* 指定如何处理溢出的内容 
+ 	 visible	内容不会被修剪，会呈现在元素框之外。
+	 hidden	内容会被修剪，但是浏览器不会显示供查看内容的滚动条。
+	 scroll	内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。
+	 auto	由浏览器决定如何显示。如果需要，则显示滚动条。
+ 	 * */
+ 	overflow-y:auto;
  }
+.message-box{
+	width: 80%;
+	height: auto;
+	background-color: #6DC1E7;
+	margin: 3px;
+}
+.message-cont{
+	
+}
+
 #chat-input{
 	background-color: ghostwhite;
  	width: 96%;
