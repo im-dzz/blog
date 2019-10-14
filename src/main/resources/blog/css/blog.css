@@ -105,3 +105,41 @@ ul li{
 #mid-blog-header-disc{
 	font-size: 15px;
 }
+
+#mid-comments{
+	width: 90%;
+	height: auto;
+	margin-left: 50px;
+	background-color:#B8BFC6;
+}
+#comment-edit{
+	width: 100%;
+}
+#comment-edit-box{
+	width: 93%;
+	resize: none;
+}
+#comment-submit{
+	width: 50px;
+	height: 90px;
+	float: right;
+	margin-right: 6px;
+	margin-top: 5px;
+	background-color: crimson;
+}
+#comment-submit:hover{
+	background-color: deeppink;
+}
+.comment-item{
+	margin-top: 5px;
+	background-color: cadetblue;
+}
+.comment-item p{
+	margin-bottom: 5px;
+}
+#mid-foot{
+	font-size: 12px;
+	color: white;
+	margin-left: 40%;
+	background-color: black;
+}

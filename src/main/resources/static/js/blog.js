@@ -1,8 +1,8 @@
 var socket;
 var date = new Date();
-var userId =  date.getMinutes() + "" + parseInt(Math.random() * 10000) + "" + date.getMilliseconds();
+var userId = date.getMinutes() + "" + parseInt(Math.random() * 10000) + "" + date.getMilliseconds();;
 
-/* 页面加载完成后就打开websocket连接*/
+/* 打开websocket连接*/
 $(document).ready(openSocket());
 //window.onload=openSocket();
 
@@ -15,14 +15,6 @@ function chat(){
 	$("#left-bottom").toggle();
 	$("#left-chat").toggle();
 }
-
-/* 测试接口调用使用 */
-//function charSend(){
-//	$.post("/chat/send", {"msg":$("#chat-input").val()},
-//    	function(status){
-//    		alert(status);
-//  		});
-//}
 
 function openSocket() {
     console.log("当前用户的id是:" + userId);
@@ -72,4 +64,16 @@ function addMessage(msgText){
 //          	alert("button clicked!" + con);
     var temp = con + "<div class=\"message-box\"><p class=\"message-cont\">" + msgText + "</p></div>";
     $("#chat-box").html(temp);
+}
+
+/* 评论 */
+function commentSend(){
+    var comment = {userId:userId, blogId:"111", content:$("#comment-edit-box").val()};
+    console.log(comment);
+	$.post("/comment/send", {"data":JSON.stringify(comment)},
+  		function(status){
+    		alert(status);
+    		$("#comment-edit-box").empty();
+  		}
+  	);
 }

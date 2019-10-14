@@ -6,62 +6,87 @@
     <title>imdzz's Blog</title>
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/blog.css">
+    <!-- jquery和自己的js文件引入顺序不能颠倒，blog.js依赖jquery，需要放到后面 -->
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/blog.js" ></script>
 </head>
 
 <!-- typora的css文件会指定内边距30，需要指定 -->
 <body style="margin: 0; padding: 0;">
-<div id="left">
-    <div id="left-top">
-        <h1 id="left-title">imdzz's blog</h1>
-        <img id="icon" src="/images/duck.jpg" />
-        <div id="breaf-introd">
-            这是一家书店，你可以随便看看<br />
-        </div>
-    </div>
-    <ul id="social-list">
-        <li class="social-list-item">
-            <a href="https://github.com/im-dzz">github</a>
-        </li>
-        <li class="social-list-item">
-            <a href="https://github.com/im-dzz">小程序</a>
-        </li>
-    </ul>
-    <!--//social-list-->
-    <hr id="left-hr" style="text-alig" />
-    <ul id="menu-list">
-        <li class="menu-list-item">
-            <a href="/blog.html">主页 </a>
-        </li>
-        <li class="menu-list-item">
-            <a href="https://github.com/im-dzz">关于作者</a>
-        </li>
-    </ul>
-    <!--//social-list-->
-    <div id="left-bottom">
-        <span id="left-bottom-cont">书店网站开源，源码请点击</span>
-        <a href="https://github.com/im-dzz/blog">这里</a>
-    </div>
-</div>
-
-<div id="mid">
-    <div id="mid-blog">
-        <header id="mid-blog-header">
-            <h2 id="mid-blog-header-title" th:text="${Blog.blog.title}"></h2>
-            <div id="mid-blog-header-disc">
-                <span class="date" th:text="发布时间：+${Blog.blog.createDate}"></span>
-                <span class="time" th:text="阅读数：+${blog.readNum}">阅读数：0</span>
-                <span class="comment"><a href="#">4 comments</a></span>
+    <div id="left">
+        <div id="left-top">
+            <h1 id="left-title">imdzz's blog</h1>
+            <img id="icon" src="/images/duck.jpg" />
+            <div id="breaf-introd">
+                这是一家书店，你可以随便看看<br />
             </div>
-        </header>
-
-        <div class="blog-post-body">
-            <figure class="blog-banner">
-                <span th:utext="${Blog.blog.content}">
-                </span>
-            </figure>
+        </div>
+        <ul id="social-list">
+            <li class="social-list-item">
+                <a href="https://github.com/im-dzz">github</a>
+            </li>
+            <li class="social-list-item">
+                <a href="https://github.com/im-dzz">小程序</a>
+            </li>
+        </ul>
+        <!--//social-list-->
+        <hr id="left-hr" style="text-alig" />
+        <ul id="menu-list">
+            <li class="menu-list-item">
+                <a href="/blog.html">主页 </a>
+            </li>
+            <li class="menu-list-item">
+                <a href="https://github.com/im-dzz">关于作者</a>
+            </li>
+        </ul>
+        <!--//social-list-->
+        <div id="left-bottom">
+            <span id="left-bottom-cont">书店网站开源，源码请点击</span>
+            <a href="https://github.com/im-dzz/blog">这里</a>
         </div>
     </div>
-</div>
+
+    <div id="mid">
+        <div id="mid-blog">
+            <header id="mid-blog-header">
+                <h2 id="mid-blog-header-title" th:text="${Blog.blog.title}"></h2>
+                <div id="mid-blog-header-disc">
+                    <span class="date" th:text="发布时间：+${Blog.blog.createDate}"></span>
+                    <span class="time" th:text="阅读数：+${blog.readNum}">阅读数：0</span>
+                    <span class="comment"><a href="#">4 comments</a></span>
+                </div>
+            </header>
+
+            <div class="blog-post-body">
+                <figure class="blog-banner">
+                    <span th:utext="${Blog.blog.content}">
+                    </span>
+                </figure>
+            </div>
+        </div>
+        <!-- 评论 -->
+        <div id="mid-comments">
+            <div id="comment-edit">
+                <textarea id="comment-edit-box" name="myComment" rows="3" cols="110" placeholder="说点什么..."></textarea>
+                <input id="comment-submit" type="button" value="评论" onclick="commentSend()"/>
+            </div>
+            <div id="comment-list">
+                <div class="comment-item">
+                    <p class="comment-userName">小aa</p>
+                    <p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
+                </div>
+                <div class="comment-item">
+                    <p class="comment-userName">小aa</p>
+                    <p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
+                </div>
+                <div class="comment-item">
+                    <p class="comment-userName">小aa</p>
+                    <p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
+                </div>
+            </div>
+        </div>
+        <span id="mid-foot">没有了</span>
+    </div>
 </body>
 
 </html>

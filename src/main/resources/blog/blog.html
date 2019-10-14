@@ -6,6 +6,8 @@
 		<title>imdzz's Blog</title>
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" href="css/blog.css">
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="js/blog.js" ></script>
 	</head>
 
 	<body>
@@ -548,13 +550,41 @@ footer.ty-footer { border-color: rgb(101, 101, 101); }
 		</div>
 
 		</span>
-		</figure>
-		</div>
-		</div>
-		<!--//container-->
-
-		</div>
-		</div>
+					</figure>
+				</div> <!-- blog-post-body end -->
+			</div> <!-- mid-blog end -->
+			<div id="mid-comments">
+				<div id="comment-edit">
+					<textarea id="comment-edit-box" name="myComment" rows="3" cols="110" placeholder="说点什么..."></textarea>
+					<input id="comment-submit" type="button" value="评论" onclick="chatSend()"/>
+				</div>
+				<div id="comment-list">
+					<div class="comment-item">
+						<p class="comment-userName">小aa</p>
+						<p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
+					</div>
+					<div class="comment-item">
+						<p class="comment-userName">小aa</p>
+						<p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
+					</div>
+					<div class="comment-item">
+						<p class="comment-userName">小aa</p>
+						<p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
+					</div>
+				</div>
+			</div>
+			<span id="mid-foot">没有了</span>
+		</div>  <!-- mid end -->
+		
+		<script>
+			function commentSend(){
+				$.post("/comment/send", {"msg":$("#comment-edit-box").val()},
+  					function(status){
+    					alert(status);
+    					$("#comment-edit-box").empty();
+  					});
+			}
+		</script>
 	</body>
 
 </html>
