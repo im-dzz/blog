@@ -61,19 +61,30 @@ function sendMessage() {
 
 function addMessage(msgText){
     var con = $("#chat-box").html();
-//          	alert("button clicked!" + con);
     var temp = con + "<div class=\"message-box\"><p class=\"message-cont\">" + msgText + "</p></div>";
     $("#chat-box").html(temp);
 }
 
 /* 评论 */
 function commentSend(){
-    var comment = {userId:userId, blogId:"111", content:$("#comment-edit-box").val()};
+    var comment = $("#comment-edit-box").val();
+    var reqStr = {userId:userId, blogId:"111", content:comment};
     console.log(comment);
-	$.post("/comment/send", {"data":JSON.stringify(comment)},
-  		function(status){
-    		alert(status);
-    		$("#comment-edit-box").empty();
+	$.post("/comment/send",
+	    {"data":JSON.stringify(reqStr)},
+  		function(resp){
+    		console.log(resp);
+    		if ("ok" == resp){
+    		    console.log("返回的是ok");
+    		    var con = $("#comment-list").html();
+    		    console.log(con);
+                var temp = con + "<div class=\"comment-item\"><p class=\"comment-userName\">"+ userId +"</p>" +
+                "<p class=\"comment-content\">" + comment + "</p> </div>";
+                console.log(temp);
+                $("#comment-list").html(temp);
+                console.log("返回处理了");
+    		}
+    		$("#comment-edit-box").val("");
   		}
   	);
 }

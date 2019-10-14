@@ -3,6 +3,7 @@ package com.imdzz.blog.controller;
 import java.util.List;
 
 import com.imdzz.blog.dto.Message;
+import com.imdzz.blog.service.CommentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import com.imdzz.blog.service.BlogService;
 public class BlogController {
 	@Autowired
 	private BlogService blogService;
+	@Autowired
+	private CommentService commentService;
 	@Autowired
 	RedisTemplate redisTemplate;
 
@@ -54,9 +57,10 @@ public class BlogController {
 	}
 	
 	@GetMapping("findById/{serialno}")
-	public ModelAndView findBlog(@PathVariable("serialno") int id, Model model) {
-		logger.info("blogs/{serialno}:{}", id);
-		model.addAttribute("blog", blogService.findBlogDTO(id, ""));
+	public ModelAndView findBlog(@PathVariable("serialno") int blogId, Model model) {
+		logger.info("blogs/{serialno}:{}", blogId);
+		model.addAttribute("blog", blogService.findBlogDTO(blogId, ""));
+		model.addAttribute("comments", commentService.findCommentsByBlogId(String.valueOf(blogId)));
 		return new ModelAndView("blog.html", "Blog", model);
 	}
 

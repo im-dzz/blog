@@ -70,18 +70,11 @@
                 <textarea id="comment-edit-box" name="myComment" rows="3" cols="110" placeholder="说点什么..."></textarea>
                 <input id="comment-submit" type="button" value="评论" onclick="commentSend()"/>
             </div>
-            <div id="comment-list">
+
+            <div id="comment-list" th:each="comment : ${Blog.comments}">
                 <div class="comment-item">
-                    <p class="comment-userName">小aa</p>
-                    <p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
-                </div>
-                <div class="comment-item">
-                    <p class="comment-userName">小aa</p>
-                    <p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
-                </div>
-                <div class="comment-item">
-                    <p class="comment-userName">小aa</p>
-                    <p class="comment-content">感谢博主，帮我解决了很大的问题，比心比心比心比心比心比心比心比心比心比心比心</p>
+                    <p class="comment-userName" th:text="${comment.userId}">小A</p>
+                    <p class="comment-content" th:text="${comment.content}">比心比心比心比心比心比心比心比心比心比心</p>
                 </div>
             </div>
         </div>
