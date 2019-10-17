@@ -120,6 +120,7 @@ ul li{
 #comment-edit-box{
 	width: 93%;
 	resize: none;
+	color: black;
 }
 #comment-submit{
 	width: 50px;
@@ -138,6 +139,10 @@ ul li{
 }
 .comment-item p{
 	margin-bottom: 5px;
+}
+.comment-userName{
+	font-size: 15px;
+	color: black;
 }
 #mid-foot{
 	font-size: 12px;

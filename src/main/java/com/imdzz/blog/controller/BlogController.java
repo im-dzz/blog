@@ -55,7 +55,13 @@ public class BlogController {
 		logger.info("列表大小是:{};分类数量为：{}", blogs.size(), classifications.size());
 		return new ModelAndView("index.html", "Blog", model);
 	}
-	
+
+    /**
+     * 查看某篇博客
+     * @param blogId
+     * @param model
+     * @return
+     */
 	@GetMapping("findById/{serialno}")
 	public ModelAndView findBlog(@PathVariable("serialno") int blogId, Model model) {
 		logger.info("blogs/{serialno}:{}", blogId);
@@ -64,6 +70,12 @@ public class BlogController {
 		return new ModelAndView("blog.html", "Blog", model);
 	}
 
+    /**
+     * 查看某个分类的所有博客
+     * @param classification
+     * @param model
+     * @return
+     */
     @GetMapping("findByClassification/{classification}")
     public ModelAndView findBlogByClassification(@PathVariable("classification") String classification, Model model) {
         logger.info("blogs/{classification}:{}", classification);

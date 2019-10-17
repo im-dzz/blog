@@ -17,7 +17,7 @@ public class Comment {
     @Id
     int serialno;
     String blogId;
-    String userId;
+    String username;
     String content;
     Date createDate;
 }

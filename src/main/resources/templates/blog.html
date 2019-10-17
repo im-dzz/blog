@@ -73,7 +73,7 @@
 
             <div id="comment-list" th:each="comment : ${Blog.comments}">
                 <div class="comment-item">
-                    <p class="comment-userName" th:text="${comment.userId}">小A</p>
+                    <p class="comment-userName" th:text="${comment.username}">小A</p>
                     <p class="comment-content" th:text="${comment.content}">比心比心比心比心比心比心比心比心比心比心</p>
                 </div>
             </div>

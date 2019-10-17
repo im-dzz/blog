@@ -81,7 +81,22 @@
 			</div>
 		</div>
 
-		<div id="right">
+		<!-- 登录框 -->
+		<div id="loginWindow">
+			<div id="login-head">
+				<span id="login-title" >登录</span>
+				<input type="button" value="关闭" onclick="closeLoginWindow()"/>
+			</div>
+			<table border="none" cellspacing="" cellpadding="">
+				<tr><td>用户名：</td><td><input id="username" type="text" placeholder="用户名" /></td></tr>
+				<tr><td>密码：</td><td><input id="password" type="password" placeholder="密码" /></td></tr>
+			</table>
+			<input id="loginBtn" type="button" value="登录" onclick="login()" />
+			<a href="register">注册</a>
+		</div>
+
+		<!-- 分类栏 -->
+		<div id="right-classifications">
 			<ul id="classifications">
 				<li class="classification" th:each="classification : ${Blog.classifications}">
 					<a th:href="@{'/blogs/findByClassification/' + ${classification}}">
@@ -90,6 +105,12 @@
 					</a>
 				</li>
 			</ul>
+		</div>
+
+		<!-- 操作栏：登录 -->
+		<div id="right-actions">
+			<input id="login" type="button" value="登录" onclick="openLogin()"/>
+			<p>Hi,<span id="user">游客</span></p>
 		</div>
 	</body>
 </html>

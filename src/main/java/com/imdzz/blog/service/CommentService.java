@@ -3,6 +3,8 @@ package com.imdzz.blog.service;
 import com.imdzz.blog.dto.CommentDTO;
 import com.imdzz.blog.model.Comment;
 import com.imdzz.blog.repository.CommentRepository;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,14 @@ public class CommentService {
      * @param commentDTO
      */
     public void saveComment(CommentDTO commentDTO){
+        Subject user = SecurityUtils.getSubject();
+
         Comment comment = new Comment();
         comment.setBlogId(commentDTO.getBlogId());
-        comment.setUserId(commentDTO.getUserId());
+        comment.setUsername(user.getPrincipal().toString());
         comment.setContent(commentDTO.getContent());
         comment.setCreateDate(new Date());
+
         commentRepository.save(comment);
     }
 
@@ -48,7 +53,7 @@ public class CommentService {
         if (comments.size() == 0){
             Comment comment = new Comment();
             comment.setBlogId(blogId);
-            comment.setUserId("系统管理员");
+            comment.setUsername("系统管理员");
             comment.setContent("快来评论吧");
             comments.add(comment);
         }

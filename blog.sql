@@ -19,3 +19,8 @@ content varchar(200) comment '评论内容',
 create_date datetime comment '创建时间',
 key `idx_comment_blog_id` (`blog_id`)
 );
+
+insert into user values(null, '123456', '111', 'imdzz');
+insert into role values(null, "管理员");
+insert into role values(null, "普通用户");
+insert into permission values(null, "comment");

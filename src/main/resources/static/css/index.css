@@ -217,7 +217,7 @@ ul li{
 	color: rgb(54, 100, 139);
 }
 
-#right{
+#right-classifications{
 	width: 15%;
 	height: auto;
 	/* position:fixed可以指定该容器相对于浏览器窗口的位置，页面滚动时，它不会动；此时它只能通过top、bottom、left和right指定位置 */
@@ -243,6 +243,24 @@ ul li{
 }
 .classification-cont{
 	font-size: 25px;
+}
+
+#right-actions{
+	width: 5%;
+	height: auto;
+	position: fixed;
+	right: 0;
+	top: 75%;
+	background-color: darkcyan;
+}
+
+#loginWindow{
+	position: fixed;
+	width: 20%;
+	height: auto;
+	left: 40%;
+	top: 30%;
+	background-color: beige;
 }
 
 /*动画*/
