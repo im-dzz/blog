@@ -1,16 +1,22 @@
 var socket;
 var connected = false;
 var date = new Date();
-var userId = date.getMinutes() + "" + parseInt(Math.random() * 10000) + "" + date.getMilliseconds();
-// 每次打开页面都会重新赋值
-var globle_user_name = "游客" + userId;
 
 /* 打开websocket连接*/
-//$(document).ready(openSocket());
+$(document).ready(initUser());
 //window.onload=openSocket();
+
+/* 初始化用户 */
+function initUser(){
+    if ($.cookie('username') == "" || $.cookie('username') == "undefined"){
+        var randomStr = date.getMinutes() + "" + parseInt(Math.random() * 10000) + "" + date.getMilliseconds();
+        $.cookie('username', "游客"+randomStr, { path: '/' });
+    }
+}
 
 /* 切换左侧无关内容，显示聊天框 */
 function chat(){
+    // toggle() 如果在显示就隐藏，如果在隐藏就显示
 	$("#left-title").toggle();
 	$("#breaf-introd").toggle();
 	$("#social-list").toggle();
@@ -26,28 +32,29 @@ function chat(){
 	}
 }
 
+/* 打开socket连接 */
 function openSocket() {
-    console.log("当前用户是:" + globle_user_name);
+    console.log("当前用户是:" + $.cookie('username'));
     if(typeof(WebSocket) == "undefined") {
         console.log("您的浏览器不支持WebSocket");
     }else{
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-        var socketUrl = "http://localhost:1234/im/"+globle_user_name;
+        var socketUrl = "http://localhost:1234/im/" + $.cookie('username');
         socketUrl = socketUrl.replace("https","ws").replace("http","ws");
-        console.log(socketUrl)
+        console.log("准备连接：" + socketUrl)
         socket = new WebSocket(socketUrl);
-        //打开事件
+        // 打开事件
         socket.onopen = function() {
             console.log("websocket已打开");
             //socket.send("这是来自客户端的消息" + location.href + new Date());
         };
-        //获得消息事件
+        // 获得消息事件
         socket.onmessage = function(msg) {
             console.log("收到了来自服务器的消息：" + msg.data);
-           //发现消息进入    开始处理前端触发逻辑
+           // 发现消息进入    开始处理前端触发逻辑
            addMessage(msg.data);
         };
-        //关闭事件
+        // 关闭事件
         socket.onclose = function() {
             console.log("websocket已关闭");
         };
@@ -63,16 +70,19 @@ function sendMessage() {
     if(typeof(WebSocket) == "undefined") {
         console.log("您的浏览器不支持WebSocket");
     }else {
+        // 如果文本框为空不做处理
         var message = $("#chat-input").val();
         if (message == null || message == ""){
             return;
         }
         console.log("要发送的内容是：" + message);
         socket.send(message);
+        // 清空文本框
     	$("#chat-input").val("");
     }
 }
 
+/* 在页面上添加收到的消息 */
 function addMessage(msgText){
     var con = $("#chat-box").html();
     var temp = con + "<div class=\"message-box\"><p class=\"message-cont\">" + msgText + "</p></div>";
@@ -81,12 +91,14 @@ function addMessage(msgText){
 
 /* 评论 */
 function commentSend(){
+    // 获取当前博客id
     var currentUrl = window.location.href;
     var index = currentUrl.lastIndexOf("/") + 1;
     var blogId = currentUrl.substr(index);
+    // 获取评论内容
     var comment = $("#comment-edit-box").val();
     var reqStr = {blogId:blogId, content:comment};
-    console.log(comment);
+    console.log("评论：" + comment);
 	$.post("/comment/send",
 	    {"data":JSON.stringify(reqStr)},
   		function(resp){
@@ -94,11 +106,9 @@ function commentSend(){
     		if ("ok" == resp){
     		    console.log("返回的是ok");
     		    var con = $("#comment-list").html();
-                var temp = con + "<div class=\"comment-item\"><p class=\"comment-userName\">"+ globle_user_name +"</p>" +
+                var temp = con + "<div class=\"comment-item\"><p class=\"comment-userName\">"+ $.cookie('username') +"</p>" +
                 "<p class=\"comment-content\">" + comment + "</p> </div>";
-                console.log(temp);
                 $("#comment-list").html(temp);
-                console.log("返回处理了");
     		}
     		$("#comment-edit-box").val("");
   		}
@@ -137,7 +147,7 @@ function login(){
    				// .val()用来修改文本框中的内容，.html用来改变元素内部的值  .append()内部追加  .perpare()向内部预置内容
       			// .after() 向备选元素之后追加  .before()在被选元素之前添加
     		    $("#user").html(username);
-    		    globle_user_name = username;
+                $.cookie('username', username, { path: '/' });
     		}
   		}
   	);

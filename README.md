@@ -1,14 +1,28 @@
 # blog
-单用户的个人博客
+个人博客网站系统
 
-SPRING BOOT + JPA + THEMLEAF + MYSQL
+## 主要功能：
+1. 将本地html格式的博客文件自动上传到服务器上。
+2. 分类查看博客。
+3. 博客评论。（未完成）
+4. 用户认证及权限管理。（未完成）
+5. 网站访问次数记录。
+6. 网站所有在线用户群聊。（待完善）
 
-run this application and view "localhostP:1234/home"
+## 主要技术：
+后端：SPRING BOOT + JPA + MySQL + Redis + Shiro + WebSocket
+前端：Thymeleaf + JQuery
 
-all the sql were wroted to blog.sql
+## 运行方法
+1. 下载安装redis，并添加持久化策略“save 10 1”
+2. 执行blog.sql中的sql语句，建立博客表和评论表。
+3. 启动项目，Hibernate会自动新建几张表，执行blog.sql中的语句，插入新的用户。
+4. 访问"localhost:1234/blogs"
 
-how to deploy a blog?
-1. write you blog on a markdown softwear
-2. import your blog as html text
-3. insert your html text to database(blog.sql)
-done
+## 发布博客
+1. 用一款自己熟悉的markdown软件写好自己的博客并导出为HTML文件，如果博客含有图片必须设置图片以相对路径的方式插入。
+2. 将博客文件和放图片的文件夹放到该博客网站的blog_temp文件夹内（自己要留备份）。
+3. 每个整点程序都会自动读取blog_temp内的文件并将其信息导入数据库、其文件和图片本身存放到blogs文件夹内。
+
+## 当前存在的BUG：
+太多了，暂时不写
