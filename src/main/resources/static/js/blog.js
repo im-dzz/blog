@@ -8,10 +8,11 @@ $(document).ready(initUser());
 
 /* 初始化用户 */
 function initUser(){
-    if ($.cookie('username') == "" || $.cookie('username') == "undefined"){
+    if ($.cookie('username') == "" || $.cookie('username') == undefined){
         var randomStr = date.getMinutes() + "" + parseInt(Math.random() * 10000) + "" + date.getMilliseconds();
         $.cookie('username', "游客"+randomStr, { path: '/' });
     }
+    console.log("用户名初始化完成" + $.cookie('username'));
 }
 
 /* 切换左侧无关内容，显示聊天框 */

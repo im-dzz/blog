@@ -77,7 +77,7 @@ public class ImController {
             logger.info("当前是：{}", entity.getKey());
             try{
                 ImController im = (ImController)entity.getValue();
-                im.sendMessage(message);
+                im.sendMessage(userId + "说：" + message);
             } catch (Exception e){
                 logger.error("给用户{}发送消息失败", entity.getKey());
                 logger.error(e.getMessage(), e);
