@@ -24,6 +24,7 @@ public class User {
     private String username;
     private String password;
     private String salt;
+    // TODO: shiro应该是可以不使用外键的。在数据库中应该尽量避免外键关联。
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") },
             inverseJoinColumns = {@JoinColumn(name = "rid") })

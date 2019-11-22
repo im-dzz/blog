@@ -1,23 +1,22 @@
 package com.imdzz.blog.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.imdzz.blog.dto.BlogDTO;
+import com.imdzz.blog.enums.ErrorCode;
+import com.imdzz.blog.exception.BlogException;
+import com.imdzz.blog.model.Blog;
+import com.imdzz.blog.repository.BlogRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.imdzz.blog.model.Blog;
-import com.imdzz.blog.repository.BlogRepository;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Service
 public class BlogService {
@@ -30,6 +29,9 @@ public class BlogService {
 	RedisTemplate redisTemplate;
 	
 	public BlogDTO findBlogDTO(Integer id, String title) {
+		if (id <= 0){
+			throw new BlogException(ErrorCode.PARAM_ERROR);
+		}
 	    Blog blog = blogRepository.getOne(id);
 	    blog.setReadNum(blog.getReadNum() + 1);
 	    blogRepository.save(blog);
@@ -37,7 +39,12 @@ public class BlogService {
 		BlogDTO blogDTO = fillContent(blog);
 		return blogDTO;
 	}
-	
+
+	/**
+	 * 此方法需优化，改为分页查询
+	 * @return
+	 */
+	// TODO: 改为分页查询
 	public List<Blog> findAllBlogs(){
 		return blogRepository.findAll();
 	}
@@ -80,6 +87,9 @@ public class BlogService {
 	}
 
 	public List<Blog> findBlogsByClassification(String classification){
+		if(StringUtils.isBlank(classification)){
+			throw new BlogException(ErrorCode.PARAM_ERROR);
+		}
 		List<Blog> blogs = blogRepository.findByClassification(classification);
 		return blogs;
 	}

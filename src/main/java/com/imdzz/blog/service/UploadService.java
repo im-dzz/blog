@@ -35,7 +35,7 @@ public class UploadService {
 	    // 存放日志文件的路径
 		File filePath = new File(tempPath);
 		if (!filePath.isDirectory()) {
-			throw new Exception("wrong path!");
+			throw new Exception("日志文件路径错误!");
 		}
 
 		// 读取所有的文件并将文本内容存入数据库

@@ -1,8 +1,11 @@
 package com.imdzz.blog.service;
 
 import com.imdzz.blog.dto.CommentDTO;
+import com.imdzz.blog.enums.ErrorCode;
+import com.imdzz.blog.exception.BlogException;
 import com.imdzz.blog.model.Comment;
 import com.imdzz.blog.repository.CommentRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -30,12 +33,16 @@ public class CommentService {
      * @param commentDTO
      */
     public void saveComment(CommentDTO commentDTO){
+        if (StringUtils.isBlank(commentDTO.getContent())){
+            throw new BlogException(ErrorCode.COMMENT_CAN_NOT_BE_NULL);
+        }
         Subject user = SecurityUtils.getSubject();
 
         Comment comment = new Comment();
         comment.setBlogId(commentDTO.getBlogId());
         comment.setUsername(user.getPrincipal().toString());
         comment.setContent(commentDTO.getContent());
+        // TODO: 实体类的日期最好是string类型
         comment.setCreateDate(new Date());
 
         commentRepository.save(comment);
