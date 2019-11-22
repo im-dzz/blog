@@ -37,7 +37,6 @@ public class BlogController {
 	 */
 	@GetMapping()
 	public ModelAndView home(Model model) {
-		logger.info("blogs接口：");
 		if (!redisTemplate.hasKey("visitorNum")){
 			redisTemplate.opsForValue().set("visitorNum", 0);
 		}
@@ -64,7 +63,6 @@ public class BlogController {
      */
 	@GetMapping("findById/{serialno}")
 	public ModelAndView findBlog(@PathVariable("serialno") int blogId, Model model) {
-		logger.info("blogs/{serialno}:{}", blogId);
 		model.addAttribute("blog", blogService.findBlogDTO(blogId, ""));
 		model.addAttribute("comments", commentService.findCommentsByBlogId(String.valueOf(blogId)));
 		return new ModelAndView("blog.html", "Blog", model);
@@ -78,7 +76,6 @@ public class BlogController {
      */
     @GetMapping("findByClassification/{classification}")
     public ModelAndView findBlogByClassification(@PathVariable("classification") String classification, Model model) {
-        logger.info("blogs/{classification}:{}", classification);
         if (!redisTemplate.hasKey("visitorNum")){
             redisTemplate.opsForValue().set("visitorNum", 0);
         }

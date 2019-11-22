@@ -26,7 +26,6 @@ public class CommentController {
     @PostMapping("/send")
     public String sendMsg(@RequestParam String data) {
         //logger.info("{}说：{}。{}", msg.getSender(), msg.getMsg(), msg.getDate());
-        logger.info("sendMsg入参:{}", data);
         CommentDTO commentDTO = JSONObject.parseObject(data, CommentDTO.class);
         commentService.saveComment(commentDTO);
         return "ok";
