@@ -259,11 +259,35 @@ ul li{
 
 #loginWindow{
 	position: fixed;
-	width: 20%;
+	width: 30%;
 	height: auto;
+	text-align: center;
 	left: 40%;
 	top: 30%;
 	background-color: beige;
+}
+#closeLoginWindowBtn{
+	float: right;
+	margin: 5px;
+	border-style: none;
+}
+#closeLoginWindowBtn:hover{
+	background-color: red;
+}
+#login-table{
+	border: 1px solid #F00;
+	margin-left: 22%;
+	margin-top: 20px;
+}
+#loginBtn{
+	width: 70%;
+	height: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: crimson;
+}
+#loginBtn:hover{
+	background-color:#4A89DC ;
 }
 
 /*动画*/
