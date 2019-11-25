@@ -1,6 +1,7 @@
 package com.imdzz.blog.exception;
 
 import com.imdzz.blog.enums.ErrorCode;
+import lombok.Data;
 
 /**
  * 自定义异常
@@ -8,6 +9,7 @@ import com.imdzz.blog.enums.ErrorCode;
  * @version 1.0
  * @date 2019/11/22 16:59
  */
+@Data
 public class BlogException extends RuntimeException{
     private String code;
 

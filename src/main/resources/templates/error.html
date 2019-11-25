@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>imdzz's Blog</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/blog.css">
+    <!-- jquery和自己的js文件引入顺序不能颠倒，blog.js依赖jquery，需要放到后面 -->
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/blog.js" ></script>
+</head>
+<body>
+    <h1>Error Handler</h1>
+    <div th:text="${code}"></div>
+    <div th:text="${msg}"></div>
+    <div th:text="${url}"></div>
+</body>
+</html>
