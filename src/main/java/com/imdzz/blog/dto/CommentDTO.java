@@ -12,6 +12,4 @@ public class CommentDTO {
     String userId;
     String blogId;
     String content;
-
-
 }

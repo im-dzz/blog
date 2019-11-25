@@ -5,6 +5,7 @@ import com.imdzz.blog.enums.ErrorCodeEnum;
 import com.imdzz.blog.exception.BlogException;
 import com.imdzz.blog.model.Comment;
 import com.imdzz.blog.repository.CommentRepository;
+import com.imdzz.blog.util.DateFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -41,8 +42,7 @@ public class CommentService {
         comment.setBlogId(commentDTO.getBlogId());
         comment.setUsername(user.getPrincipal().toString());
         comment.setContent(commentDTO.getContent());
-        // TODO: 实体类的日期最好是string类型
-        comment.setCreateDate(new Date());
+        comment.setCreateDate(DateFormatter.getNowDateStr());
 
         commentRepository.save(comment);
     }

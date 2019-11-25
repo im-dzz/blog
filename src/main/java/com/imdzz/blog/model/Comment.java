@@ -19,5 +19,5 @@ public class Comment {
     String blogId;
     String username;
     String content;
-    Date createDate;
+    String createDate;
 }

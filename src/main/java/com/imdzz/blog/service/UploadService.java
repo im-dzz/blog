@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+import com.imdzz.blog.util.DateFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,8 +66,8 @@ public class UploadService {
 					classification = "Others";
 				}
 				blog.setClassification(classification);
-				blog.setCreateDate(new Date());
-				blog.setUpdateDate(new Date());
+				blog.setCreateDate(DateFormatter.getNowDateStr());
+				blog.setUpdateDate(DateFormatter.getNowDateStr());
 				blogRepository.save(blog);
 			} catch(Exception e){
         		log.info(e.getMessage(), e);

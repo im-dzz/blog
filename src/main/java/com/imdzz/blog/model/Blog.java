@@ -17,7 +17,7 @@ public class Blog {
 	String content;   // 正文
 	String classification;  // 类别
     int readNum;  // 阅读数
-	Date createDate;  // 创建时间
-	Date updateDate;  // 更新时间
+	String createDate;  // 创建时间
+	String updateDate;  // 更新时间
 	
 }
