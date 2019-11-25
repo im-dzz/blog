@@ -2,6 +2,7 @@ package com.imdzz.blog.controller;
 
 import java.util.List;
 
+import com.imdzz.blog.constant.GlobalConstant;
 import com.imdzz.blog.dto.Message;
 import com.imdzz.blog.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,12 +38,12 @@ public class BlogController {
 	 */
 	@GetMapping()
 	public ModelAndView home(Model model) {
-		if (!redisTemplate.hasKey("visitorNum")){
-			redisTemplate.opsForValue().set("visitorNum", 0);
+		if (!redisTemplate.hasKey(GlobalConstant.VISITOR_NUM)){
+			redisTemplate.opsForValue().set(GlobalConstant.VISITOR_NUM, 0);
 		}
-		int visitorNum = (int) redisTemplate.opsForValue().get("visitorNum");
-		log.info("redis:visitorNum={}", visitorNum);
-		redisTemplate.opsForValue().set("visitorNum", ++visitorNum);
+		int visitorNum = (int) redisTemplate.opsForValue().get(GlobalConstant.VISITOR_NUM);
+		log.info("当前累计访问人数：{}", visitorNum);
+		redisTemplate.opsForValue().set(GlobalConstant.VISITOR_NUM, ++visitorNum);
 
 		List<Blog> blogs = blogService.findAllBlogs();
 		List<String> classifications = blogService.findAllClassifications();
@@ -76,11 +77,11 @@ public class BlogController {
      */
     @GetMapping("findByClassification/{classification}")
     public ModelAndView findBlogByClassification(@PathVariable("classification") String classification, Model model) {
-        if (!redisTemplate.hasKey("visitorNum")){
-            redisTemplate.opsForValue().set("visitorNum", 0);
+        if (!redisTemplate.hasKey(GlobalConstant.VISITOR_NUM)){
+            redisTemplate.opsForValue().set(GlobalConstant.VISITOR_NUM, 0);
         }
-        int visitorNum = (int) redisTemplate.opsForValue().get("visitorNum");
-        log.info("redis:visitorNum={}", visitorNum);
+        int visitorNum = (int) redisTemplate.opsForValue().get(GlobalConstant.VISITOR_NUM);
+        log.info("redis:当前访问人数是{}", visitorNum);
 
         model.addAttribute("blogs", blogService.findBlogsByClassification(classification));
         model.addAttribute("classifications", blogService.findAllClassifications());

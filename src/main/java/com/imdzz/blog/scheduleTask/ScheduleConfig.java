@@ -6,6 +6,12 @@
 //
 //import java.util.concurrent.Executors;
 //
+///**
+// * 定时任务执行线程池
+// * @author imdzz
+// * @version 1.0
+// * @date 2019/10/16 10:28
+// */
 //@Configuration
 //public class ScheduleConfig implements SchedulingConfigurer {
 //    @Override
