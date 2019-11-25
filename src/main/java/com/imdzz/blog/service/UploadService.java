@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,9 @@ import com.imdzz.blog.model.Blog;
 import com.imdzz.blog.repository.BlogRepository;
 
 @Service
+@Slf4j
 public class UploadService {
-	private Logger logger = LoggerFactory.getLogger(UploadService.class);
-	
+
 	@Autowired
 	private BlogRepository blogRepository;
 
@@ -41,14 +42,14 @@ public class UploadService {
 		// 读取所有的文件并将文本内容存入数据库
         for (String name : filePath.list()) {
         	try{
-				logger.info("开始处理：" + name);
+				log.info("开始处理：" + name);
 				String destPath = blogPath + "/" + name;
 				File tempFile = new File(tempPath + "/" + name);
 				File destFile = new File(destPath);
 				tempFile.renameTo(destFile);
 
 				if(destFile.isDirectory()){
-					logger.info("{}是存放图片的目录，跳过", destFile.getName());
+					log.info("{}是存放图片的目录，跳过", destFile.getName());
 					continue;
 				}
 
@@ -68,7 +69,7 @@ public class UploadService {
 				blog.setUpdateDate(new Date());
 				blogRepository.save(blog);
 			} catch(Exception e){
-        		logger.info(e.getMessage(), e);
+        		log.info(e.getMessage(), e);
 			}
         }
 	}

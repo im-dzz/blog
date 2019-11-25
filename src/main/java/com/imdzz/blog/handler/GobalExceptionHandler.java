@@ -1,10 +1,8 @@
 package com.imdzz.blog.handler;
 
-import com.imdzz.blog.enums.ErrorCode;
+import com.imdzz.blog.enums.ErrorCodeEnum;
 import com.imdzz.blog.exception.BlogException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,9 +15,8 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2019/11/25 9:39
  */
 @ControllerAdvice
+@Slf4j
 public class GobalExceptionHandler {
-
-    private Logger logger = LoggerFactory.getLogger(GobalExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultExceptionHandler(Exception error, HttpServletRequest request){
@@ -29,12 +26,13 @@ public class GobalExceptionHandler {
             modelAndView.addObject("code", blogException.getCode());
             modelAndView.addObject("msg", blogException.getMessage());
             modelAndView.addObject("url", request.getRequestURL());
-            logger.info("发生异常！code:{},msg:{}", blogException.getCode(), blogException.getMessage());
+            log.info("发生异常！code:{},msg:{}", blogException.getCode(), blogException.getMessage());
         } else{
-            modelAndView .addObject("code", ErrorCode.SYSTEM_ERROR.getCode());
+            modelAndView .addObject("code", ErrorCodeEnum.SYSTEM_ERROR.getCode());
             modelAndView .addObject("msg", error.getMessage());
             modelAndView.addObject("url", request.getRequestURL());
-            logger.error("发生异常！code:{},msg:{}", ErrorCode.SYSTEM_ERROR.getCode(), error.getMessage());
+            // 发生异常时打印堆栈信息
+            log.error("系统错误！" + error.getMessage(), error);
         }
         modelAndView.setViewName("error.html");
         return modelAndView;

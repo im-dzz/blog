@@ -1,15 +1,14 @@
 package com.imdzz.blog.service;
 
 import com.imdzz.blog.dto.CommentDTO;
-import com.imdzz.blog.enums.ErrorCode;
+import com.imdzz.blog.enums.ErrorCodeEnum;
 import com.imdzz.blog.exception.BlogException;
 import com.imdzz.blog.model.Comment;
 import com.imdzz.blog.repository.CommentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +21,8 @@ import java.util.List;
  * @date 2019/10/10 16:29
  */
 @Service
+@Slf4j
 public class CommentService {
-    Logger logger = LoggerFactory.getLogger(CommentService.class);
 
     @Autowired
     CommentRepository commentRepository;
@@ -34,7 +33,7 @@ public class CommentService {
      */
     public void saveComment(CommentDTO commentDTO){
         if (StringUtils.isBlank(commentDTO.getContent())){
-            throw new BlogException(ErrorCode.COMMENT_CAN_NOT_BE_NULL);
+            throw new BlogException(ErrorCodeEnum.COMMENT_CAN_NOT_BE_NULL);
         }
         Subject user = SecurityUtils.getSubject();
 
@@ -55,7 +54,7 @@ public class CommentService {
      */
     public List<Comment> findCommentsByBlogId(String blogId){
         List<Comment> comments = commentRepository.findByBlogId(blogId);
-        logger.info("评论的数量是：{}", comments.size());
+        log.info("评论的数量是：{}", comments.size());
         // 因为thyemleaf模板问题，如果comments为空，那么页面上th:each所在那个评论列表div也就没有了，会影响新评论在div中的添加
         if (comments.size() == 0){
             Comment comment = new Comment();

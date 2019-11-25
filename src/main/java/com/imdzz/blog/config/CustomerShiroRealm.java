@@ -4,6 +4,7 @@ import com.imdzz.blog.model.Permission;
 import com.imdzz.blog.model.Role;
 import com.imdzz.blog.model.User;
 import com.imdzz.blog.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -22,9 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 1.0
  * @date 2019/10/16 10:12
  */
+@Slf4j
 public class CustomerShiroRealm extends AuthorizingRealm {
-    private Logger logger = LoggerFactory.getLogger(CustomerShiroRealm.class);
-
     @Autowired
     UserService userService;
 
@@ -59,19 +59,19 @@ public class CustomerShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
-        logger.info("开始验证用户密码");
+        log.info("开始验证用户密码");
         String username = (String) authenticationToken.getPrincipal();
         User user = userService.findUserByName(username);
 
         if (user == null) {
-            logger.info("用户名不存在");
+            log.info("用户名不存在");
             return null;
         }
         // 加盐加密的话就需要传四个参数
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(),
                 //ByteSource.Util.bytes(user.getCredentialsSalt()),
                 getName());
-        logger.info("用户密码验证完成");
+        log.info("用户密码验证完成");
         return authenticationInfo;
     }
 }

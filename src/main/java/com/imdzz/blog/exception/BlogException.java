@@ -1,6 +1,6 @@
 package com.imdzz.blog.exception;
 
-import com.imdzz.blog.enums.ErrorCode;
+import com.imdzz.blog.enums.ErrorCodeEnum;
 import lombok.Data;
 
 /**
@@ -13,7 +13,7 @@ import lombok.Data;
 public class BlogException extends RuntimeException{
     private String code;
 
-    public BlogException(ErrorCode errorCode){
+    public BlogException(ErrorCodeEnum errorCode){
         super(errorCode.getMsg());
         this.code = errorCode.getCode();
     }

@@ -1,4 +1,4 @@
-package com.imdzz.blog.util;
+package com.imdzz.blog.enums;
 
 /**
  * 博客的分类

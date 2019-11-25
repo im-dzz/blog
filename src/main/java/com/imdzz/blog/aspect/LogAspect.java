@@ -65,6 +65,6 @@ public class LogAspect {
 
     @AfterThrowing(pointcut = "log()")
     public void doAfterThrowing(JoinPoint joinPoint){
-        log.info("------------{} End---------", joinPoint.getSignature().getName());
+        log.info("------------{} exception---------", joinPoint.getSignature().getName());
     }
 }

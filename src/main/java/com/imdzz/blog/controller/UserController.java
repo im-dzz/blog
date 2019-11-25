@@ -2,6 +2,7 @@ package com.imdzz.blog.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.imdzz.blog.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("user")
+@Slf4j
 public class UserController {
-    private Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     UserService userService;
 
@@ -35,7 +36,7 @@ public class UserController {
         String password = reqJson.getString("password");
         userService.registUser(username, password);
 
-        logger.info("用户注册成功");
+        log.info("用户注册成功");
         return "注册成功";
     }
 
@@ -70,7 +71,7 @@ public class UserController {
         if (subject.isAuthenticated()) {
             Session session = subject.getSession();
             session.setAttribute("username", subject.getPrincipal());
-            logger.info("当前用户是：{}", session.getAttribute("username"));
+            log.info("当前用户是：{}", session.getAttribute("username"));
             return "登录成功";
         } else {
             token.clear();

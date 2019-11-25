@@ -1,13 +1,12 @@
 package com.imdzz.blog.service;
 
 import com.imdzz.blog.dto.BlogDTO;
-import com.imdzz.blog.enums.ErrorCode;
+import com.imdzz.blog.enums.ErrorCodeEnum;
 import com.imdzz.blog.exception.BlogException;
 import com.imdzz.blog.model.Blog;
 import com.imdzz.blog.repository.BlogRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
+@Slf4j
 public class BlogService {
-	private Logger logger = LoggerFactory.getLogger(BlogService.class);
 
 	@Autowired
     private BlogRepository blogRepository;
@@ -30,7 +29,7 @@ public class BlogService {
 	
 	public BlogDTO findBlogDTO(Integer id, String title) {
 		if (id <= 0){
-			throw new BlogException(ErrorCode.PARAM_ERROR);
+			throw new BlogException(ErrorCodeEnum.PARAM_ERROR);
 		}
 	    Blog blog = blogRepository.getOne(id);
 	    blog.setReadNum(blog.getReadNum() + 1);
@@ -71,7 +70,7 @@ public class BlogService {
 
 			fileIn.close();
 		} catch(Exception e){
-			logger.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 
 		return blogDTO;
@@ -88,7 +87,7 @@ public class BlogService {
 
 	public List<Blog> findBlogsByClassification(String classification){
 		if(StringUtils.isBlank(classification)){
-			throw new BlogException(ErrorCode.PARAM_ERROR);
+			throw new BlogException(ErrorCodeEnum.PARAM_ERROR);
 		}
 		List<Blog> blogs = blogRepository.findByClassification(classification);
 		return blogs;

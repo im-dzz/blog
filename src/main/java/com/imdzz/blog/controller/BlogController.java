@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.imdzz.blog.dto.Message;
 import com.imdzz.blog.service.CommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.imdzz.blog.service.BlogService;
 
 @RestController
 @RequestMapping("blogs")
+@Slf4j
 public class BlogController {
 	@Autowired
 	private BlogService blogService;
@@ -27,8 +29,6 @@ public class BlogController {
 	private CommentService commentService;
 	@Autowired
 	RedisTemplate redisTemplate;
-
-	private Logger logger = LoggerFactory.getLogger(BlogController.class);
 
 	/**
 	 * 访问主页，记录访客
@@ -41,7 +41,7 @@ public class BlogController {
 			redisTemplate.opsForValue().set("visitorNum", 0);
 		}
 		int visitorNum = (int) redisTemplate.opsForValue().get("visitorNum");
-		logger.info("redis:visitorNum={}", visitorNum);
+		log.info("redis:visitorNum={}", visitorNum);
 		redisTemplate.opsForValue().set("visitorNum", ++visitorNum);
 
 		List<Blog> blogs = blogService.findAllBlogs();
@@ -51,7 +51,7 @@ public class BlogController {
 		model.addAttribute("visitorNum", visitorNum);
 		// 当页面上需要form表单时，打开页面时必须传入一个对象，否则会找不到
 		model.addAttribute("message", new Message());
-		logger.info("列表大小是:{};分类数量为：{}", blogs.size(), classifications.size());
+		log.info("列表大小是:{};分类数量为：{}", blogs.size(), classifications.size());
 		return new ModelAndView("index.html", "Blog", model);
 	}
 
@@ -80,7 +80,7 @@ public class BlogController {
             redisTemplate.opsForValue().set("visitorNum", 0);
         }
         int visitorNum = (int) redisTemplate.opsForValue().get("visitorNum");
-        logger.info("redis:visitorNum={}", visitorNum);
+        log.info("redis:visitorNum={}", visitorNum);
 
         model.addAttribute("blogs", blogService.findBlogsByClassification(classification));
         model.addAttribute("classifications", blogService.findAllClassifications());

@@ -1,9 +1,12 @@
 package com.imdzz.blog.service;
 
+import com.imdzz.blog.enums.ErrorCodeEnum;
+import com.imdzz.blog.exception.BlogException;
 import com.imdzz.blog.model.Role;
 import com.imdzz.blog.model.User;
 import com.imdzz.blog.repository.RoleRepository;
 import com.imdzz.blog.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ import java.util.Optional;
  * @date 2019/10/16 10:28
  */
 @Service
+@Slf4j
 public class UserService {
     @Autowired
     UserRepository userRepository;
@@ -24,7 +28,12 @@ public class UserService {
     RoleRepository roleRepository;
 
     public User findUserByName(String username){
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+        if (user == null){
+            throw new BlogException(ErrorCodeEnum.USER_NOT_EXITS);
+        }
+
+        return user;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.imdzz.blog.websocket;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -25,8 +26,8 @@ import com.alibaba.fastjson.JSON;
  */
 @ServerEndpoint("/im/{userId}")
 @Component
+@Slf4j
 public class ImController {
-    private static Logger logger = LoggerFactory.getLogger(ImController.class);
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -42,14 +43,14 @@ public class ImController {
     public void onOpen(Session session, @PathParam("userId") String userId) {
         this.session = session;
         websocketList.put(userId, this);
-        logger.info("websocketList->" + JSON.toJSONString(websocketList));
+        log.info("websocketList->" + JSON.toJSONString(websocketList));
         addOnlineCount();           //在线数加1
-        logger.info("有新窗口开始监听:"+userId+",当前在线人数为" + getOnlineCount());
+        log.info("有新窗口开始监听:"+userId+",当前在线人数为" + getOnlineCount());
         this.userId=userId;
         try {
             sendMessage("连接成功");
         } catch (IOException e) {
-            logger.error("websocket IO异常");
+            log.error("websocket IO异常");
         }
     }
 
@@ -61,7 +62,7 @@ public class ImController {
         if(websocketList.get(this.userId)!=null){
             websocketList.remove(this.userId);
             subOnlineCount();           //在线数减1
-            logger.info("有一连接关闭！当前在线人数为" + getOnlineCount());
+            log.info("有一连接关闭！当前在线人数为" + getOnlineCount());
         }
     }
 
@@ -71,19 +72,19 @@ public class ImController {
      * @param message 客户端发送过来的消息*/
     @OnMessage
     public void onMessage(String message, Session session) {
-        logger.info("收到来自{}的信息:{}", userId, message);
-        logger.info("websocketList的长度是：{}", websocketList.size());
+        log.info("收到来自{}的信息:{}", userId, message);
+        log.info("websocketList的长度是：{}", websocketList.size());
         for (Map.Entry entity : websocketList.entrySet()){
-            logger.info("当前是：{}", entity.getKey());
+            log.info("当前是：{}", entity.getKey());
             try{
                 ImController im = (ImController)entity.getValue();
                 im.sendMessage(userId + "说：" + message);
             } catch (Exception e){
-                logger.error("给用户{}发送消息失败", entity.getKey());
-                logger.error(e.getMessage(), e);
+                log.error("给用户{}发送消息失败", entity.getKey());
+                log.error(e.getMessage(), e);
             }
         }
-        logger.info("消息处理完毕");
+        log.info("消息处理完毕");
     }
 
     /**
@@ -93,7 +94,7 @@ public class ImController {
      */
     @OnError
     public void onError(Session session, Throwable error) {
-        logger.error(error.getMessage(), error);
+        log.error(error.getMessage(), error);
     }
 
     /**
