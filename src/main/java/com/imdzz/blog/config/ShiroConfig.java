@@ -33,10 +33,10 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl("/home/index");  // 登录成功后跳转到此url
 
         filterChainDefinitionMap.put("/*", "anon");  // 所有用户可访问
-        filterChainDefinitionMap.put("/authc/index", "authc");   // 已登录用户可访问
-        filterChainDefinitionMap.put("/authc/admin", "roles[admin]");   // 指定角色可访问
-        filterChainDefinitionMap.put("/authc/renewable", "perms[Create,Update]");  // 指定权限的用户可访问
-        filterChainDefinitionMap.put("/authc/removable", "perms[Delete]");
+        filterChainDefinitionMap.put("/blogs/findById/*", "authc");   // 已登录用户可访问
+//        filterChainDefinitionMap.put("/authc/admin", "roles[admin]");   // 指定角色可访问
+//        filterChainDefinitionMap.put("/authc/renewable", "perms[Create,Update]");  // 指定权限的用户可访问
+//        filterChainDefinitionMap.put("/authc/removable", "perms[Delete]");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

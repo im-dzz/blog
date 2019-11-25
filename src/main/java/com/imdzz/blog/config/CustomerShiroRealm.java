@@ -29,7 +29,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
     UserService userService;
 
     /**
-     * 读取用角色和户权限信息
+     * 读取用户的角色和权限信息
      * @param principalCollection
      * @return
      */
@@ -39,14 +39,16 @@ public class CustomerShiroRealm extends AuthorizingRealm {
         String username = (String) principalCollection.getPrimaryPrincipal();
 
         User user = userService.findUserByName(username);
+        authorizationInfo.addRoles(userService.getUserRoles(user.getId()));
+        authorizationInfo.addStringPermissions(userService.getUserPermissions(user.getId()));
 
         // 读取用户的所有角色和权限，并把每一个角色和权限都放到authorizationInfo中
-        for (Role role : user.getRoles()) {
-            authorizationInfo.addRole(role.getRole());
-            for (Permission permission : role.getPermissions()) {
-                authorizationInfo.addStringPermission(permission.getName());
-            }
-        }
+//        for (Role role : user.getRoles()) {
+//            authorizationInfo.addRole(role.getRole());
+//            for (Permission permission : role.getPermissions()) {
+//                authorizationInfo.addStringPermission(permission.getName());
+//            }
+//        }
         return authorizationInfo;
     }
 
@@ -61,6 +63,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             throws AuthenticationException {
         log.info("开始验证用户密码");
         String username = (String) authenticationToken.getPrincipal();
+        log.info("用户姓名为：{}", username);
         User user = userService.findUserByName(username);
 
         if (user == null) {

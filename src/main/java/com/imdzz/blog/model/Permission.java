@@ -14,11 +14,10 @@ import java.util.List;
 @Entity
 public class Permission {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     private String name;
-    @ManyToMany
-    @JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "pid") }, inverseJoinColumns = {
-            @JoinColumn(name = "rid") })
-    private List<Role> roles;
+//    @ManyToMany
+//    @JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "pid") }, inverseJoinColumns = {
+//            @JoinColumn(name = "rid") })
+//    private List<Role> roles;
 }

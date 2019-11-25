@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  * @date 2019/10/16 15:21
  */
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+public interface RoleRepository extends JpaRepository<Role, String> {
     
 }

@@ -13,7 +13,8 @@ public enum ErrorCodeEnum {
     PARAM_ERROR("100001", "参数错误"),
     COMMENT_CAN_NOT_BE_NULL("100002", "评论内容不能为空"),
 
-    USER_NOT_EXITS("200001", "用户不存在");
+    USER_NOT_EXITS("200001", "用户不存在"),
+    TOO_MUCH_USERS("200002", "存在多个用户");
 
 
     private final String code;

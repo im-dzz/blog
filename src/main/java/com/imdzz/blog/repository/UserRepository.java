@@ -2,12 +2,21 @@ package com.imdzz.blog.repository;
 
 import com.imdzz.blog.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @author imdzz
  * @version 1.0
  * @date 2019/10/16 10:28
  */
-public interface UserRepository extends JpaRepository<User, Integer> {
-    public User findByUsername(String username);
+public interface UserRepository extends JpaRepository<User, String> {
+//    public User findByUsername(String username);
+
+    public List<User> findUserByUsername(String username);
+
+//    @Query(value = "select * from blog.user where username = ?1", nativeQuery = true)
+//    public List<User> findUserByUsernamea(String username);
+
 }

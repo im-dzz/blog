@@ -34,7 +34,7 @@ public class UserController {
         JSONObject reqJson = JSONObject.parseObject(data);
         String username = reqJson.getString("username");
         String password = reqJson.getString("password");
-        userService.registUser(username, password);
+        //userService.registUser(username, password);
 
         log.info("用户注册成功");
         return "注册成功";

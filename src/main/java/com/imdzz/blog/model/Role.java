@@ -14,15 +14,6 @@ import java.util.List;
 @Entity
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     private String role;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "rid") },
-            inverseJoinColumns = {@JoinColumn(name = "pid") })
-    private List<Permission> permissions;
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "rid") },
-            inverseJoinColumns = {@JoinColumn(name = "uid") })
-    private List<User> users;
 }

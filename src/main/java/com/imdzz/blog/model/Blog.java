@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Blog {
 	@Id
-	int serialno;  // 主键
+	String serialno;  // 主键
 	String title;   // 标题
 	String subTitle;  // 副标题/摘要
 	String content;   // 正文

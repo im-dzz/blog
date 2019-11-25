@@ -31,7 +31,7 @@ public class BlogService {
 		if (id <= 0){
 			throw new BlogException(ErrorCodeEnum.PARAM_ERROR);
 		}
-	    Blog blog = blogRepository.getOne(id);
+	    Blog blog = blogRepository.getOne(String.valueOf(id));
 	    blog.setReadNum(blog.getReadNum() + 1);
 	    blogRepository.save(blog);
 
