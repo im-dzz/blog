@@ -5,6 +5,9 @@ import java.util.List;
 import com.imdzz.blog.constant.GlobalConstant;
 import com.imdzz.blog.dto.Message;
 import com.imdzz.blog.service.CommentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.imdzz.blog.model.Blog;
 import com.imdzz.blog.service.BlogService;
 
+@Api(value = "博客操作控制器")
 @RestController
 @RequestMapping("blogs")
 @Slf4j
@@ -36,6 +40,7 @@ public class BlogController {
 	 * @param model
 	 * @return
 	 */
+    @ApiOperation(value = "返回所有博客列表", notes = "访问“/”时自动调用")
 	@GetMapping()
 	public ModelAndView home(Model model) {
 		if (!redisTemplate.hasKey(GlobalConstant.VISITOR_NUM)){
@@ -62,8 +67,9 @@ public class BlogController {
      * @param model
      * @return
      */
-	@GetMapping("findById/{serialno}")
-	public ModelAndView findBlog(@PathVariable("serialno") int blogId, Model model) {
+    @ApiOperation(value = "根据id获取博客", notes = "")
+    @GetMapping("findById/{serialno}")
+	public ModelAndView findBlog(@ApiParam(value = "博客Id" , required=true ) @PathVariable("serialno") int blogId, Model model) {
 		model.addAttribute("blog", blogService.findBlogDTO(blogId, ""));
 		model.addAttribute("comments", commentService.findCommentsByBlogId(String.valueOf(blogId)));
 		return new ModelAndView("blog.html", "Blog", model);
