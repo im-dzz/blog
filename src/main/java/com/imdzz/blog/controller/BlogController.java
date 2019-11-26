@@ -81,11 +81,11 @@ public class BlogController {
             redisTemplate.opsForValue().set(GlobalConstant.VISITOR_NUM, 0);
         }
         int visitorNum = (int) redisTemplate.opsForValue().get(GlobalConstant.VISITOR_NUM);
-        log.info("redis:当前访问人数是{}", visitorNum);
+        log.info("redis:网站点击量是{}", visitorNum);
 
         model.addAttribute("blogs", blogService.findBlogsByClassification(classification));
         model.addAttribute("classifications", blogService.findAllClassifications());
-        model.addAttribute("visitorNum", visitorNum);
-        return new ModelAndView("index.html", "Blog", model);
+		model.addAttribute("visitorNum", visitorNum);
+		return new ModelAndView("index.html", "Blog", model);
     }
 }

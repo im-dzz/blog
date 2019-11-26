@@ -12,11 +12,6 @@ import java.util.List;
  * @date 2019/10/16 10:28
  */
 public interface UserRepository extends JpaRepository<User, String> {
-//    public User findByUsername(String username);
 
     public List<User> findUserByUsername(String username);
-
-//    @Query(value = "select * from blog.user where username = ?1", nativeQuery = true)
-//    public List<User> findUserByUsernamea(String username);
-
 }
