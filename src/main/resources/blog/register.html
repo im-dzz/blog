@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+		<meta charset="utf-8" />
+    	<title>imdzz's Blog</title>
+	    <link rel="shortcut icon" href="favicon.ico"> 
+	    <link rel="stylesheet" href="css/register.css">
+	    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="js/blog.js" ></script>
+	</head>
+	<body>
+		<h2>注册imdzz's blog</h2>
+		<div id="main">
+			<div id="login" >
+				<span>邮箱：</span><input id="acctno" type="text" placeholder="请输入真实邮箱"/><br>
+				<span>昵称：</span><input id="password" type="password" placeholder="请输入昵称" /><br />
+				<span>邮件验证码：</span><input id="email-code" type="text" placeholder="请输入您收到的验证码"/>
+				<input id="sendEmailBtn" type="button" value="发送验证码"/><br>
+				<span>图片验证码：</span><input id="email-code" type="text" placeholder="请输入图片中的文字"/>
+				<img src="img/blog/default.jpg" width="100px" height="50px"/>
+				<hr>
+				<input id="loginBtn" type="button" value="确认"/>
+			</div>
+		</div>
+		
+	</body>
+</html>

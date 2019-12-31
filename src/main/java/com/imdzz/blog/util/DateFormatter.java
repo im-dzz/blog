@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DateFormatter {
 
-	private static final String DEFAULT_FORMAT = "YYYY-mm-DD HH:MM:SS";
+	private static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	public static String getFormateBy(Date date, String format) {
 		if (null == date) {
