@@ -920,3 +920,47 @@ Downloaded from nexus-aliyun: http://maven.aliyun.com/nexus/content/groups/publi
 [INFO] Total time:  21.298 s
 [INFO] Finished at: 2019-12-31T15:01:56+08:00
 [INFO] ------------------------------------------------------------------------
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< com.imdzz:blog >---------------------------
+[INFO] Building blog 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ blog ---
+[INFO] Deleting D:\mydata\IDEA WORKS\target
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ blog ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 53 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ blog ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 39 source files to D:\mydata\IDEA WORKS\target\classes
+[INFO] /D:/mydata/IDEA WORKS/src/main/java/com/imdzz/blog/controller/BlogController.java: D:\mydata\IDEA WORKS\src\main\java\com\imdzz\blog\controller\BlogController.java使用了未经检查或不安全的操作。
+[INFO] /D:/mydata/IDEA WORKS/src/main/java/com/imdzz/blog/controller/BlogController.java: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ blog ---
+[INFO] Not copying test resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ blog ---
+[INFO] Not compiling test sources
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ blog ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:3.1.2:jar (default-jar) @ blog ---
+[INFO] Building jar: D:\mydata\IDEA WORKS\target\blog-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.1.7.RELEASE:repackage (repackage) @ blog ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ blog ---
+[INFO] Installing D:\mydata\IDEA WORKS\target\blog-0.0.1-SNAPSHOT.jar to D:\tools\maven\mvnRrepository\com\imdzz\blog\0.0.1-SNAPSHOT\blog-0.0.1-SNAPSHOT.jar
+[INFO] Installing D:\mydata\IDEA WORKS\pom.xml to D:\tools\maven\mvnRrepository\com\imdzz\blog\0.0.1-SNAPSHOT\blog-0.0.1-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.562 s
+[INFO] Finished at: 2020-01-01T00:30:34+08:00
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>登录</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="/css/login.css">
+    <!-- jquery和自己的js文件引入顺序不能颠倒，blog.js依赖jquery，需要放到后面 -->
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/blog.js" ></script>
+</head>
+<body style="margin: 0; padding: 0;">
+<table id="login-table" cellspacing="10px">
+    <tr>
+        <td><label for="username" >用户名：</label></td>
+        <td><input id="username" type="text"></td>
+    </tr>
+    <tr>
+        <td><label for="password" >密 码：</label></td>
+        <td><input id="password" type="password"></td>
+    </tr>
+    <tr>
+        <td><label for="verification-code" >验证码：</label></td>
+        <td><input id="verification-code" type="text"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <a herf="#">忘记密码？</a>
+            <a href="#">注册</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input id="login-btn" type="submit" value="登录"/>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+
+

@@ -153,3 +153,33 @@ function login(){
   		}
   	);
 }
+
+/* 注册新用户 */
+function gotoRegist(){
+    var username = $("#username").val();
+	var password = $("#password").val();
+	var confirmPassword = $("#confirm_password").val();
+	if (username == "" || username == undefined){
+		alert("用户名不能为空！");
+		return;
+	} else if(password == "" || password == undefined){
+		alert("密码不能为空！");
+		return;
+	} else if(password != confirmPassword){
+	    alert("两次输入的密码不一致！");
+	    return;
+	}
+
+	var reqStr = {username:username, password:password};
+	console.log("发送的报文是：" + JSON.stringify(reqStr))
+	$.post("/user/register",
+ 		{"data":JSON.stringify(reqStr)},
+		function(resp){
+    		console.log(resp);
+    		if ("注册成功" == resp){
+    		    alert("注册成功");
+    		    window.history.back(-1);
+    		}
+  		}
+  	);
+}

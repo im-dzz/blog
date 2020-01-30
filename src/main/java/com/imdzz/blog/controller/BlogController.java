@@ -59,7 +59,7 @@ public class BlogController {
 		model.addAttribute("message", new Message());
 		log.info("列表大小是:{};分类数量为：{}", blogs.size(), classifications.size());
 		return new ModelAndView("index.html", "Blog", model);
-	}
+    }
 
     /**
      * 查看某篇博客

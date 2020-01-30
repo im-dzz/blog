@@ -25,7 +25,7 @@ public class Task {
 	/***
 	 * 每天0点自动上传html格式的博客到数据库
 	 */
-	@Scheduled(cron = "0 0 * * * ?")
+	//@Scheduled(cron = "0 * * * * ?")
 	public void uploadBlog(){
 		log.info("开始上传博客");
 		try {

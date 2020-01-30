@@ -13,6 +13,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +38,10 @@ public class CustomerShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         String username = (String) principalCollection.getPrimaryPrincipal();
-
         User user = userService.findUserByName(username);
         authorizationInfo.addRoles(userService.getUserRoles(user.getId()));
         authorizationInfo.addStringPermissions(userService.getUserPermissions(user.getId()));
 
-        // 读取用户的所有角色和权限，并把每一个角色和权限都放到authorizationInfo中
-//        for (Role role : user.getRoles()) {
-//            authorizationInfo.addRole(role.getRole());
-//            for (Permission permission : role.getPermissions()) {
-//                authorizationInfo.addStringPermission(permission.getName());
-//            }
-//        }
         return authorizationInfo;
     }
 
@@ -61,20 +54,20 @@ public class CustomerShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
-        log.info("开始验证用户密码");
         String username = (String) authenticationToken.getPrincipal();
-        log.info("用户姓名为：{}", username);
-        User user = userService.findUserByName(username);
+        log.info("用户：{}，开始验证用户密码", username);
 
+        User user = userService.findUserByName(username);
         if (user == null) {
-            log.info("用户名不存在");
+            log.info("用户：{}，不存在", username);
             return null;
         }
+
         // 加盐加密的话就需要传四个参数
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(),
-                //ByteSource.Util.bytes(user.getCredentialsSalt()),
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+                user.getUsername(), user.getPassword(), ByteSource.Util.bytes(user.getSalt()),
                 getName());
-        log.info("用户密码验证完成");
+        log.info("用户:{},密码验证完成", username);
         return authenticationInfo;
     }
 }

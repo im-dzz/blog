@@ -1,0 +1,45 @@
+html,body{
+	/* 只有设置了html和body的大小，子类才可以用%号指定大小*/
+	height: 100%;
+	width: 100%;
+	background-color: whitesmoke;
+}
+
+#register-table{
+	width:500px;
+	float:right;
+	margin-top: 15%;
+	margin-right: 5%;
+}
+#register-table label{
+	font-size:18px
+}
+
+#username{
+	height:30px;
+	width:250px;
+	padding-right:50px;
+}
+
+#password{
+	height:30px;
+	width:250px;
+	padding-right:50px;
+}
+
+#confirm_password{
+	height:30px;
+	width:250px;
+	padding-right:50px;
+}
+
+#verification-code{
+	height:30px;
+	width:200px;
+}
+
+#register-btn{
+	height:35px;
+	width:400px;
+	background-color:cornflowerblue;
+}

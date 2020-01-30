@@ -15,12 +15,9 @@ import java.util.List;
 @Entity
 public class User {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private String id;
     private String username;
     private String password;
     private String salt;
-
-    public String getCredentialsSalt() {
-        return username + salt + salt;
-    }
 }

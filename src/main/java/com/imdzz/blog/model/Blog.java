@@ -3,6 +3,8 @@ package com.imdzz.blog.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
@@ -11,6 +13,7 @@ import lombok.Data;
 @Data
 public class Blog {
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	String serialno;  // 主键
 	String title;   // 标题
 	String subTitle;  // 副标题/摘要

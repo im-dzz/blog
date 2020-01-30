@@ -1,5 +1,6 @@
 package com.imdzz.blog.config;
 
+import com.imdzz.blog.util.PasswordHelper;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -26,14 +27,13 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-
-        Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setUnauthorizedUrl("/unauthc");  //权限不足跳转的url
-        shiroFilterFactoryBean.setSuccessUrl("/home/index");  // 登录成功后跳转到此url
+        shiroFilterFactoryBean.setSuccessUrl("/blogs");  // 登录成功后跳转到此url
 
-        filterChainDefinitionMap.put("/*", "anon");  // 所有用户可访问
-        filterChainDefinitionMap.put("/blogs/findById/*", "authc");   // 已登录用户可访问
+        Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
+        filterChainDefinitionMap.put("/user/*", "anon");  // 所有用户可访问
+        filterChainDefinitionMap.put("/blogs/findById/**", "authc");   // 已登录用户可访问
 //        filterChainDefinitionMap.put("/authc/admin", "roles[admin]");   // 指定角色可访问
 //        filterChainDefinitionMap.put("/authc/renewable", "perms[Create,Update]");  // 指定权限的用户可访问
 //        filterChainDefinitionMap.put("/authc/removable", "perms[Delete]");
@@ -42,16 +42,18 @@ public class ShiroConfig {
     }
 
     /**
-     * 配置密码散列
+     * 配置密码验证类
+     * 但是用不用盐什么的是在doGetAuthenticationInfo()方法中确定的
      * @return
      */
-//    @Bean
-//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-//        hashedCredentialsMatcher.setHashAlgorithmName(PasswordHelper.ALGORITHM_NAME); // 散列算法
-//        hashedCredentialsMatcher.setHashIterations(PasswordHelper.HASH_ITERATIONS); // 散列次数
-//        return hashedCredentialsMatcher;
-//    }
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        // 哈希过的资格证书匹配器
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName(PasswordHelper.ALGORITHM_NAME); // 散列算法
+        hashedCredentialsMatcher.setHashIterations(PasswordHelper.HASH_ITERATIONS); // 散列次数
+        return hashedCredentialsMatcher;
+    }
 
     /**
      * 使用上面方法返回的对象创建一个权限验证类
@@ -60,7 +62,7 @@ public class ShiroConfig {
     @Bean
     public CustomerShiroRealm shiroRealm() {
         CustomerShiroRealm shiroRealm = new CustomerShiroRealm();
-        //shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher()); // 原来在这里
+        shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return shiroRealm;
     }
 

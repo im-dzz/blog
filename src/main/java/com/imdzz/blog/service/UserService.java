@@ -9,6 +9,7 @@ import com.imdzz.blog.repository.RolePermissionRepository;
 import com.imdzz.blog.repository.RoleRepository;
 import com.imdzz.blog.repository.UserRepository;
 import com.imdzz.blog.repository.UserRoleRepository;
+import com.imdzz.blog.util.PasswordHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,6 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    RoleRepository roleRepository;
     @Autowired
     UserRoleRepository userRoleRepository;
     @Autowired
@@ -53,21 +52,16 @@ public class UserService {
      * @param password
      * @return
      */
-//    public User registUser(String username, String password){
-//        User user = new User();
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        // 5-游客
-//        Optional<Role> role = roleRepository.findById(5);
-//        List roles = user.getRoles();
-//        if(roles == null){
-//            roles = new ArrayList<>(3);
-//        }
-//        roles.add(role.get());
-//        user.setRoles(roles);
-//        userRepository.save(user);
-//        return user;
- //   }
+    public User registerUser(String username, String password){
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        PasswordHelper.encryptPassword(user);
+
+        // TODO: 需要设置好用户权限
+        userRepository.save(user);
+        return user;
+    }
 
     /**
      * 查找某用户的所有角色
